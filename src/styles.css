@@ -203,6 +203,22 @@
   }
 }
 
+/* Accent CTA that leads with a circular icon badge. */
+@utility btn-accent-icon {
+  @apply btn-accent;
+  padding-block: 0.5rem;
+  padding-inline: 0.5rem 1.5rem;
+}
+
+/* Persistent nav / footer link label. */
+@utility nav-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+
 /* --- Typography ----------------------------------------------------------
  * Uppercase micro-label above headings. Color stays with the caller
  * (text-accent / text-muted-foreground) so there is one shape, many tones. */

@@ -58,6 +58,27 @@ export const t: Dict = {
     en: "Message sent — I'll get back to you soon!",
     ar: "تم إرسال الرسالة — سأعود إليك قريباً!",
   },
+
+  "welcome.eyebrow": { en: "Welcome aboard", ar: "أهلاً بك" },
+  "welcome.title": {
+    en: "Great systems start with one conversation.",
+    ar: "الأنظمة العظيمة تبدأ بمحادثة واحدة.",
+  },
+  "welcome.body": {
+    en: "You've spent a minute here — so let me be direct. I design marketplace platforms that stay fast under real traffic, real vendors and real money: .NET 8 microservices, tuned databases and architecture that survives growth instead of collapsing under it.",
+    ar: "قضيت دقيقة هنا — فدعني أكون مباشراً. أصمم منصات تجارة إلكترونية تبقى سريعة تحت ضغط حقيقي من الزوار والبائعين والمعاملات: خدمات مصغّرة على .NET 8، قواعد بيانات محسّنة، ومعمارية تنمو بدل أن تنهار.",
+  },
+  "welcome.highlight": {
+    en: "If your platform has to scale, it should be built right the first time.",
+    ar: "إذا كانت منصتك مطالبة بالتوسّع، فيجب بناؤها بشكل صحيح من المرة الأولى.",
+  },
+  "welcome.primary": { en: "Start a conversation", ar: "ابدأ محادثة" },
+  "welcome.secondary": { en: "See the work first", ar: "شاهد الأعمال أولاً" },
+  "welcome.footnote": {
+    en: "No forms, no pressure — just a reply within 24 hours.",
+    ar: "بلا ضغط — رد خلال 24 ساعة.",
+  },
+  "welcome.close": { en: "Close welcome message", ar: "إغلاق رسالة الترحيب" },
 };
 
 interface I18nContextValue {

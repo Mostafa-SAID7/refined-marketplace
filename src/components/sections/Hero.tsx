@@ -77,7 +77,7 @@ export function Hero() {
               <span className="grid size-9 place-items-center rounded-full bg-foreground text-background transition-transform duration-300 group-hover:rotate-12">
                 <Play className="size-4 fill-current" />
               </span>
-              <span className="text-xs">{tr("hero.workWithMe")}</span>
+              <span>{tr("hero.workWithMe")}</span>
             </a>
             <button
               onClick={downloadCV}

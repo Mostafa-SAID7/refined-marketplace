@@ -15,6 +15,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ThemeProvider } from "@/lib/theme";
 import { I18nProvider } from "@/lib/i18n";
 import { useSmoothScroll } from "@/lib/smooth-scroll";
+import { WelcomeModal } from "@/components/ui/WelcomeModal";
 
 function NotFoundComponent() {
   return (
@@ -134,6 +135,7 @@ function RootComponent() {
       <ThemeProvider>
         <I18nProvider>
           <Toaster position="bottom-right" richColors />
+          <WelcomeModal />
           {/* Required: nested routes render here. */}
           <Outlet />
         </I18nProvider>

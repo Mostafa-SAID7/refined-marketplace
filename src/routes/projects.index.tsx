@@ -54,8 +54,6 @@ type SortValue = (typeof SORTS)[number]["value"];
 export function ProjectsPage() {
   const [filter, setFilter] = useState<(typeof projectFilters)[number]>("All");
   const [searchQuery, setSearchQuery] = useState("");
-  // Keeps typing responsive: filtering runs at low priority and the grid shows
-  // skeletons for the frame(s) where results are still catching up.
   const deferredQuery = useDeferredValue(searchQuery);
   const isFiltering = deferredQuery !== searchQuery;
   const [sort, setSort] = useState<SortValue>("default");
@@ -72,7 +70,6 @@ export function ProjectsPage() {
 
   const filtered = useMemo(() => {
     let result = filter === "All" ? projects : projects.filter((p) => p.category === filter);
-
     const query = deferredQuery.trim().toLowerCase();
     if (query) {
       result = result.filter(
@@ -84,7 +81,6 @@ export function ProjectsPage() {
           p.tech.some((t) => t.toLowerCase().includes(query)),
       );
     }
-
     const sorted = [...result];
     if (sort === "az") sorted.sort((a, b) => a.title.localeCompare(b.title));
     if (sort === "za") sorted.sort((a, b) => b.title.localeCompare(a.title));
@@ -105,52 +101,55 @@ export function ProjectsPage() {
   const hasActiveFilters = filter !== "All" || searchQuery.trim().length > 0 || sort !== "default";
 
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
+    <div className="flex min-h-screen flex-col select-none">
       <Navbar />
       <main className="flex-1">
         <section className="pb-16 pt-28 md:pb-20 md:pt-32">
           <div className="mx-auto max-w-6xl px-5">
             <Reveal>
-              <header className="mb-10 max-w-2xl">
-                <span className="eyebrow text-accent">
-                  Portfolio
+              <header className="mb-10 max-w-2xl text-center md:text-left">
+                <span className="rounded-full bg-foreground/10 px-4 py-1.5 font-sans text-xs font-black tracking-[0.25em] text-primary uppercase border border-border inline-block mb-3">
+                  PORTFOLIO & CASE STUDIES
                 </span>
-                <h1 className="mt-3 break-words text-3xl font-bold sm:text-4xl md:text-5xl">All Projects</h1>
-                <p className="mt-4 text-lg text-muted-foreground">
-                  Marketplaces, storefronts and dashboards — search, filter and sort the full
-                  catalogue.
+                <h1 className="font-['Oswald',sans-serif] text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight uppercase">
+                  All Projects
+                </h1>
+                <p className="mt-3 font-sans text-sm sm:text-base text-foreground/90">
+                  Marketplaces, .NET 8 microservices, real-time dashboards, and multi-tenant architectures.
                 </p>
               </header>
             </Reveal>
 
-            {/* Toolbar: search + sort + view, all in one line on desktop */}
-            <div className="sticky top-24 z-20 -mx-5 mb-6 px-5 py-3 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-              <div className="glass grid grid-cols-1 gap-3 rounded-2xl p-3 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center">
+            {/* Toolbar: search + sort + view mode */}
+            <div className="sticky top-24 z-20 -mx-5 mb-6 px-5 py-2">
+              <div className="rounded-[2rem] bg-card p-3.5 border border-border shadow-[var(--shadow-glow)] grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center">
+                {/* Search Box */}
                 <div className="relative min-w-0">
                   <label htmlFor="project-search" className="sr-only">
                     Search projects
                   </label>
-                  <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-card-foreground/70" />
                   <input
                     id="project-search"
                     type="search"
                     placeholder="Search by name, tech, client…"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="h-11 w-full rounded-xl border border-border bg-secondary/40 pl-10 pr-9 text-sm text-foreground transition-all placeholder:text-muted-foreground focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/50"
+                    className="h-11 w-full rounded-xl border border-border bg-foreground/10 pl-11 pr-9 text-sm text-card-foreground placeholder:text-card-foreground/60 transition-all focus:border-foreground/40 focus:bg-foreground/15 focus:outline-none"
                   />
                   {searchQuery && (
                     <button
                       type="button"
                       onClick={() => setSearchQuery("")}
                       aria-label="Clear search"
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-lg p-1 text-muted-foreground transition-colors hover:text-accent"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg p-1 text-card-foreground/70 hover:text-card-foreground transition-colors"
                     >
                       <X className="size-4" />
                     </button>
                   )}
                 </div>
 
+                {/* Sort Selector */}
                 <div className="relative">
                   <label htmlFor="project-sort" className="sr-only">
                     Sort projects
@@ -159,19 +158,19 @@ export function ProjectsPage() {
                     <SelectTrigger
                       id="project-sort"
                       aria-label="Sort projects"
-                      className="h-11 w-full gap-2 rounded-xl border-border bg-secondary/40 px-3.5 text-sm font-medium text-foreground shadow-none transition-all hover:border-accent/40 focus:border-accent/50 focus:ring-1 focus:ring-accent/50 data-[state=open]:border-accent/50 md:w-48"
+                      className="h-11 w-full gap-2 rounded-xl border-border bg-foreground/10 px-3.5 text-sm font-bold text-card-foreground shadow-none transition-all hover:bg-foreground/15 focus:ring-0 md:w-48"
                     >
                       <div className="flex min-w-0 flex-1 items-center gap-2 whitespace-nowrap text-left">
-                        <ArrowUpDown className="size-4 shrink-0 text-muted-foreground" />
+                        <ArrowUpDown className="size-4 shrink-0 text-primary" />
                         <SelectValue />
                       </div>
                     </SelectTrigger>
-                    <SelectContent className="rounded-xl border-border/70">
+                    <SelectContent className="rounded-xl border-border bg-card text-card-foreground">
                       {SORTS.map((s) => (
                         <SelectItem
                           key={s.value}
                           value={s.value}
-                          className="cursor-pointer rounded-lg text-sm focus:bg-accent/10 focus:text-accent"
+                          className="cursor-pointer rounded-lg text-sm text-card-foreground hover:bg-foreground/10 focus:bg-foreground/10"
                         >
                           {s.label}
                         </SelectItem>
@@ -180,23 +179,16 @@ export function ProjectsPage() {
                   </Select>
                 </div>
 
+                {/* View Mode Toggle */}
                 <div
                   role="group"
                   aria-label="View mode"
-                  className="flex h-11 shrink-0 items-center gap-1 rounded-xl border border-border bg-secondary/40 p-1"
+                  className="flex h-11 shrink-0 items-center gap-1 rounded-xl border border-border bg-foreground/10 p-1"
                 >
-                  <ViewButton
-                    active={view === "grid"}
-                    onClick={() => setView("grid")}
-                    label="Grid view"
-                  >
+                  <ViewButton active={view === "grid"} onClick={() => setView("grid")} label="Grid view">
                     <LayoutGrid className="size-4" />
                   </ViewButton>
-                  <ViewButton
-                    active={view === "list"}
-                    onClick={() => setView("list")}
-                    label="List view"
-                  >
+                  <ViewButton active={view === "list"} onClick={() => setView("list")} label="List view">
                     <Rows3 className="size-4" />
                   </ViewButton>
                 </div>
@@ -204,29 +196,30 @@ export function ProjectsPage() {
             </div>
 
             {/* Filter chips */}
-            <div className="mb-4 flex gap-2 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="mb-6 flex flex-wrap items-center gap-2 sm:gap-2.5 py-1">
               {projectFilters.map((f) => (
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
                   aria-pressed={filter === f}
-                  className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+                  className={`rounded-full px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-black tracking-widest uppercase transition-all duration-200 ${
                     filter === f
-                      ? "bg-accent text-accent-foreground"
-                      : "border border-border bg-secondary/40 text-muted-foreground hover:border-accent/50 hover:text-accent"
+                      ? "bg-primary text-primary-foreground shadow-md scale-105"
+                      : "border border-border bg-foreground/10 text-foreground/90 hover:bg-foreground/20"
                   }`}
                 >
                   {f}
                   {counts[f] != null && (
-                    <span className="ml-1.5 text-xs opacity-70">{counts[f]}</span>
+                    <span className="ml-1.5 text-[10px] opacity-80">({counts[f]})</span>
                   )}
                 </button>
               ))}
             </div>
 
-            <div className="mb-8 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
+            {/* Results Count & Reset Button */}
+            <div className="mb-8 flex flex-wrap items-center justify-between gap-3 text-sm text-foreground/90 font-medium">
               <p>
-                <span className="font-semibold text-foreground">{filtered.length}</span>{" "}
+                Showing <span className="font-bold text-foreground">{filtered.length}</span>{" "}
                 {filtered.length === 1 ? "project" : "projects"}
                 {totalPages > 1 && ` · page ${page} of ${totalPages}`}
               </p>
@@ -237,10 +230,10 @@ export function ProjectsPage() {
                     setSearchQuery("");
                     setSort("default");
                   }}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 font-semibold transition-colors hover:border-accent/50 hover:text-accent"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-foreground/10 border border-border px-4 py-1.5 font-sans text-xs font-black tracking-wider uppercase text-foreground hover:bg-foreground/20 transition-colors"
                 >
-                  <X className="size-3.5" />
-                  Reset
+                  <X className="size-3.5 text-primary" />
+                  Reset Filters
                 </button>
               )}
             </div>
@@ -265,16 +258,13 @@ export function ProjectsPage() {
                 </motion.div>
 
                 {totalPages > 1 && (
-                  <nav
-                    aria-label="Pagination"
-                    className="flex flex-wrap items-center justify-center gap-3"
-                  >
+                  <nav aria-label="Pagination" className="flex flex-wrap items-center justify-center gap-3">
                     <button
                       onClick={() => setCurrentPage(Math.max(1, page - 1))}
                       disabled={page === 1}
-                      className="inline-flex items-center gap-2 rounded-xl border border-border px-4 py-2 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-40 hover:enabled:border-accent/50 hover:enabled:text-accent"
+                      className="inline-flex items-center gap-2 rounded-xl bg-foreground/10 border border-border px-4 py-2 text-xs font-black tracking-wider text-foreground transition-all disabled:opacity-40 hover:enabled:bg-foreground/20"
                     >
-                      <ChevronLeft className="size-4" />
+                      <ChevronLeft className="size-4 text-primary" />
                       Previous
                     </button>
 
@@ -284,10 +274,10 @@ export function ProjectsPage() {
                           key={p}
                           onClick={() => setCurrentPage(p)}
                           aria-current={p === page ? "page" : undefined}
-                          className={`size-10 rounded-xl text-sm font-semibold transition-all ${
+                          className={`size-10 rounded-xl text-xs font-black transition-all ${
                             p === page
-                              ? "bg-accent text-accent-foreground"
-                              : "border border-border bg-secondary/40 text-muted-foreground hover:border-accent/50 hover:text-accent"
+                              ? "bg-foreground text-background shadow-md"
+                              : "border border-border bg-foreground/10 text-foreground hover:bg-foreground/20"
                           }`}
                         >
                           {p}
@@ -298,10 +288,10 @@ export function ProjectsPage() {
                     <button
                       onClick={() => setCurrentPage(Math.min(totalPages, page + 1))}
                       disabled={page === totalPages}
-                      className="inline-flex items-center gap-2 rounded-xl border border-border px-4 py-2 text-sm font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-40 hover:enabled:border-accent/50 hover:enabled:text-accent"
+                      className="inline-flex items-center gap-2 rounded-xl bg-foreground/10 border border-border px-4 py-2 text-xs font-black tracking-wider text-foreground transition-all disabled:opacity-40 hover:enabled:bg-foreground/20"
                     >
                       Next
-                      <ChevronRight className="size-4" />
+                      <ChevronRight className="size-4 text-primary" />
                     </button>
                   </nav>
                 )}
@@ -336,7 +326,7 @@ function ViewButton({
       aria-label={label}
       title={label}
       className={`inline-flex size-9 items-center justify-center rounded-lg transition-all ${
-        active ? "bg-accent text-accent-foreground" : "text-muted-foreground hover:text-accent"
+        active ? "bg-foreground text-background font-bold shadow-sm" : "text-foreground/70 hover:text-foreground"
       }`}
     >
       {children}

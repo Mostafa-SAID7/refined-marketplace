@@ -1,130 +1,123 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { Reveal } from "@/components/ui/Reveal";
-import { useI18n } from "@/lib/i18n";
-import { PageSkeleton } from "@/components/ui/Skeletons";
 
 const stats = [
-  { value: "$1B+", label: "GMV shipped" },
-  { value: "10+", label: "Years building" },
-  { value: "5M+", label: "Users served" },
-  { value: "12", label: "Marketplaces launched" },
+  { value: "4+", label: "Years Experience" },
+  { value: "300%", label: "Throughput Boost" },
+  { value: "1,000+", label: "IoT Endpoints" },
+  { value: ".NET 8", label: "Clean Microservices" },
 ];
 
 const principles = [
   {
-    title: "Architecture first",
-    body: "Clean Architecture and DDD boundaries so the platform can grow vendors, catalogs and regions without a rewrite.",
+    title: "Clean Architecture & DDD",
+    body: "Architecting .NET 8 Microservices using Clean Architecture and Domain-Driven Design (DDD) boundaries so platforms scale multi-tenancy seamlessly.",
   },
   {
-    title: "Real-time by default",
-    body: "SignalR, Kafka and gRPC pipelines for bidding, order events and telemetry that must land in milliseconds.",
+    title: "Real-Time Telemetry & SignalR",
+    body: "High-throughput SignalR and gRPC backend integration layers managing real-time data streams and over 1,000 IoT endpoints.",
   },
   {
-    title: "Measured performance",
-    body: "Query tuning, indexing strategies and distributed caching — measured before and after, never guessed.",
+    title: "Measured Database Tuning",
+    body: "300% system performance optimization through SQL Server query tuning, indexing, and Redis distributed caching.",
   },
   {
-    title: "Ownership end to end",
-    body: "From schema design and API contracts to CI/CD pipelines and the frontend your customers actually touch.",
+    title: "Full Stack Ownership",
+    body: "End-to-end execution from database schemas and REST APIs down to Next.js, React, and Angular responsive frontends.",
   },
 ];
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Marketplace Systems Architect" },
+      { title: "About — Mostafa Samir | Senior Full Stack Engineer" },
       {
         name: "description",
         content:
-          "Ten years designing multi-vendor marketplaces, real-time bidding engines and multi-tenant commerce platforms end to end.",
+          "Senior Full Stack Engineer with 4+ years of experience specializing in high-performance .NET 8 Microservices & Next.js marketplaces.",
       },
-      { property: "og:title", content: "About — Marketplace Systems Architect" },
-      {
-        property: "og:description",
-        content:
-          "How I approach marketplace architecture: clean boundaries, real-time pipelines and measured performance.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/about" }],
   }),
   component: AboutPage,
-  pendingComponent: PageSkeleton,
 });
 
 function AboutPage() {
-  const { tr } = useI18n();
-
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen select-none pt-24 pb-12 overflow-x-hidden">
       <Navbar />
-      <main>
-        <PageHeader kicker={tr("about.kicker")} title="About Me" subtitle={tr("about.body")} />
+      <main className="mx-auto max-w-6xl px-4 sm:px-8 md:px-12">
+        {/* Header Banner */}
+        <section className="py-12 text-center">
+          <span className="rounded-full bg-foreground/10 px-4 py-1.5 font-sans text-xs font-black tracking-[0.25em] text-primary uppercase border border-border inline-block mb-4">
+            SENIOR FULL STACK ENGINEER
+          </span>
+          <h1 className="font-['Oswald',sans-serif] text-5xl sm:text-6xl md:text-7xl font-bold text-foreground tracking-tight uppercase leading-tight mb-4">
+            About Mostafa Samir
+          </h1>
+          <p className="font-sans text-sm sm:text-base text-foreground/90 max-w-2xl mx-auto leading-relaxed">
+            Senior Full Stack Engineer specializing in building scalable multi-tenant platforms, .NET 8 Microservices, and high-performance modern web apps.
+          </p>
+        </section>
 
-        <section className="px-5 pb-8">
-          <div className="mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:grid-cols-4">
-            {stats.map((s, i) => (
-              <Reveal key={s.label} delay={i * 0.07}>
-                <div className="glass rounded-2xl p-6 text-center transition-transform hover:-translate-y-1">
-                  <div className="text-3xl font-extrabold text-accent">{s.value}</div>
-                  <div className="mt-1 text-sm text-muted-foreground">{s.label}</div>
+        {/* Stats Grid */}
+        <section className="py-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-[2rem] bg-card p-6 text-center border border-border shadow-lg"
+              >
+                <div className="font-['Oswald',sans-serif] text-3xl sm:text-4xl font-bold text-card-foreground">
+                  {s.value}
                 </div>
-              </Reveal>
+                <div className="font-sans text-[11px] font-black tracking-wider text-card-foreground/80 uppercase mt-1">
+                  {s.label}
+                </div>
+              </div>
             ))}
           </div>
         </section>
 
-        <section className="px-5 py-16">
-          <div className="mx-auto max-w-5xl">
-            <Reveal>
-              <h2 className="font-display text-3xl font-black uppercase tracking-tight">
-                How I work
-              </h2>
-            </Reveal>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {principles.map((p, i) => (
-                <Reveal key={p.title} delay={i * 0.07}>
-                  <div className="glass h-full rounded-2xl p-7">
-                    <h3 className="flex items-center gap-3 text-lg font-bold">
-                      <span className="size-2 rounded-full bg-accent" />
-                      {p.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-
-            <Reveal delay={0.2}>
-              <div className="mt-12 flex flex-wrap gap-3">
-                <Link
-                  to="/skills"
-                  className="pill-outline"
-                >
-                  Skills & tooling
-                  <ArrowRight className="size-4" />
-                </Link>
-                <Link
-                  to="/experience"
-                  className="pill-outline"
-                >
-                  Experience timeline
-                  <ArrowRight className="size-4" />
-                </Link>
-                <Link
-                  to="/contact"
-                  className="btn-accent"
-                >
-                  {tr("about.cta")}
-                  <ArrowRight className="size-4" />
-                </Link>
+        {/* Core Principles */}
+        <section className="py-12">
+          <h2 className="font-['Oswald',sans-serif] text-3xl sm:text-4xl font-bold text-foreground mb-8 text-center uppercase tracking-tight">
+            Engineering Approach
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {principles.map((p) => (
+              <div
+                key={p.title}
+                className="rounded-[2.5rem] bg-card p-8 border border-border shadow-[var(--shadow-glow)]"
+              >
+                <h3 className="font-['Oswald',sans-serif] text-2xl font-bold text-card-foreground flex items-center gap-3 mb-3">
+                  <CheckCircle2 className="size-5 text-primary" />
+                  {p.title}
+                </h3>
+                <p className="font-sans text-xs sm:text-sm text-card-foreground/85 leading-relaxed">
+                  {p.body}
+                </p>
               </div>
-            </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-12 flex justify-center gap-4 flex-wrap">
+            <Link
+              to="/skills"
+              className="inline-flex items-center gap-2 rounded-full bg-card px-6 py-3 font-sans text-xs font-black tracking-widest text-card-foreground uppercase shadow-md border border-border hover:scale-105 transition-transform"
+            >
+              Skills & Tooling
+              <ArrowRight className="size-4" />
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-sans text-xs font-black tracking-widest text-primary-foreground uppercase shadow-md hover:scale-105 transition-transform"
+            >
+              Get in Touch
+              <ArrowRight className="size-4" />
+            </Link>
           </div>
         </section>
       </main>

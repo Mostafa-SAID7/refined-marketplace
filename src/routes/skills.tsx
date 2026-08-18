@@ -1,96 +1,111 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Code, Database, Cpu, Lock } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { Reveal } from "@/components/ui/Reveal";
-import { skillGroups } from "@/data";
-import { PageSkeleton } from "@/components/ui/Skeletons";
+
+const skillGroupsData = [
+  {
+    title: "Backend & Microservices",
+    Icon: Code,
+    skills: [".NET 8", "C#", "ASP.NET Core Web API", "Clean Architecture", "SignalR", "gRPC", "DDD", "Entity Framework", "LINQ"],
+  },
+  {
+    title: "Frontend Engineering",
+    Icon: Cpu,
+    skills: ["Angular", "React.js", "Next.js", "Redux", "TypeScript", "Tailwind CSS", "Responsive Design"],
+  },
+  {
+    title: "Databases & Storage",
+    Icon: Database,
+    skills: ["SQL Server (Advanced Tuning)", "PostgreSQL", "Redis Caching", "MongoDB", "SSRS"],
+  },
+  {
+    title: "DevOps, Security & QA",
+    Icon: Lock,
+    skills: ["Azure DevOps", "Docker", "Kubernetes", "OAuth 2.0", "JWT", "RBAC", "TDD", "Playwright", "Cypress"],
+  },
+];
 
 export const Route = createFileRoute("/skills")({
   head: () => ({
     meta: [
-      { title: "Skills & Stack — Marketplace Engineering" },
+      { title: "Skills & Stack — Mostafa Samir | Senior Full Stack Engineer" },
       {
         name: "description",
         content:
-          "The full toolkit: .NET 8 microservices, React and Next.js frontends, real-time messaging, databases, DevOps, security and testing.",
+          "Full technical skills & stack: .NET 8 Microservices, Clean Architecture, Angular, Next.js, SQL Server, Redis, and Azure DevOps.",
       },
-      { property: "og:title", content: "Skills & Stack — Marketplace Engineering" },
-      {
-        property: "og:description",
-        content:
-          "Frontend, backend, data, real-time, DevOps and security capabilities used to ship marketplaces.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/skills" }],
   }),
   component: SkillsPage,
-  pendingComponent: PageSkeleton,
 });
 
 function SkillsPage() {
-  const total = skillGroups.reduce((n, g) => n + g.skills.length, 0);
-
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen select-none pt-24 pb-12 overflow-x-hidden">
       <Navbar />
-      <main>
-        <PageHeader
-          kicker={`${total} technologies · ${skillGroups.length} disciplines`}
-          title="Skills & Stack"
-          subtitle="Every layer of a marketplace platform — from the vendor dashboard down to the caching strategy and the deployment pipeline."
-        />
+      <main className="mx-auto max-w-6xl px-4 sm:px-8 md:px-12">
+        {/* Banner */}
+        <section className="py-12 text-center">
+          <span className="rounded-full bg-foreground/10 px-4 py-1.5 font-sans text-xs font-black tracking-[0.25em] text-primary uppercase border border-border inline-block mb-4">
+            TECHNICAL COMPETENCIES
+          </span>
+          <h1 className="font-['Oswald',sans-serif] text-5xl sm:text-6xl md:text-7xl font-bold text-foreground tracking-tight uppercase leading-tight mb-4">
+            Skills & Stack
+          </h1>
+          <p className="font-sans text-sm sm:text-base text-foreground/90 max-w-xl mx-auto leading-relaxed">
+            The complete toolkit — from .NET 8 microservices down to Redis distributed caching and Next.js frontends.
+          </p>
+        </section>
 
-        <section className="px-5 py-12">
-          <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2">
-            {skillGroups.map((group, i) => (
-              <Reveal key={group.title} delay={i * 0.06}>
-                <div className="glass h-full rounded-2xl p-7 transition-transform hover:-translate-y-1">
-                  <div className="mb-5 flex items-baseline justify-between gap-3">
-                    <h2 className="flex items-center gap-3 text-xl font-bold">
-                      <span className="size-2 rounded-full bg-accent" />
-                      {group.title}
-                    </h2>
-                    <span className="eyebrow text-muted-foreground">
-                      {group.skills.length}
-                    </span>
+        {/* Skills Cards Grid */}
+        <section className="py-6">
+          <div className="grid gap-6 sm:grid-cols-2">
+            {skillGroupsData.map(({ title, Icon, skills }) => (
+              <div
+                key={title}
+                className="rounded-[2.5rem] bg-card p-8 border border-border shadow-[var(--shadow-glow)]"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="grid size-10 place-items-center rounded-full bg-foreground/10 text-primary border border-border">
+                    <Icon className="size-5" />
                   </div>
-                  <div className="flex flex-wrap gap-2.5">
-                    {group.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-border bg-background/40 px-3.5 py-1.5 text-sm text-muted-foreground transition-colors hover:border-accent/50 hover:text-accent"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+                  <h2 className="font-['Oswald',sans-serif] text-2xl font-bold text-card-foreground">
+                    {title}
+                  </h2>
                 </div>
-              </Reveal>
+
+                <div className="flex flex-wrap gap-2.5">
+                  {skills.map((s) => (
+                    <span
+                      key={s}
+                      className="rounded-full bg-foreground/10 px-4 py-1.5 font-sans text-xs font-bold text-card-foreground border border-border shadow-sm"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
 
-          <Reveal delay={0.2}>
-            <div className="mx-auto mt-14 flex max-w-5xl flex-wrap gap-3">
-              <Link
-                to="/projects"
-                className="pill-outline"
-              >
-                See it applied in projects
-                <ArrowRight className="size-4" />
-              </Link>
-              <Link
-                to="/experience"
-                className="pill-outline"
-              >
-                Experience timeline
-                <ArrowRight className="size-4" />
-              </Link>
-            </div>
-          </Reveal>
+          <div className="mt-12 flex justify-center gap-4 flex-wrap">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 rounded-full bg-card px-6 py-3 font-sans text-xs font-black tracking-widest text-card-foreground uppercase shadow-md border border-border hover:scale-105 transition-transform"
+            >
+              See Projects
+              <ArrowRight className="size-4" />
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-sans text-xs font-black tracking-widest text-primary-foreground uppercase shadow-md hover:scale-105 transition-transform"
+            >
+              Work With Me
+              <ArrowRight className="size-4" />
+            </Link>
+          </div>
         </section>
       </main>
       <Footer />

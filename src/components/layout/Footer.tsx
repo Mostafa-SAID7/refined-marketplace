@@ -1,105 +1,153 @@
-import { Github, Linkedin, Twitter, Dribbble, Instagram, Play } from "lucide-react";
+import { Github, Linkedin, Mail, MessageSquare, Play } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 const socials = [
-  { Icon: Dribbble, label: "Dribbble", href: "#", tone: "bg-social-dribbble" },
-  {
-    Icon: Twitter,
-    label: "Twitter",
-    href: "#",
-    tone: "bg-social-twitter",
-    featured: true,
-  },
-  { Icon: Linkedin, label: "LinkedIn", href: "#", tone: "bg-social-linkedin" },
   {
     Icon: Github,
     label: "GitHub",
     href: "https://github.com/Mostafa-SAID7",
-    tone: "bg-social-github",
+    bgClass: "bg-[var(--social-github)]",
+    featured: true,
   },
-  { Icon: Instagram, label: "Instagram", href: "#", tone: "bg-social-instagram" },
+  {
+    Icon: Linkedin,
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/mostafasamirsaid",
+    bgClass: "bg-[var(--social-linkedin)]",
+    featured: true,
+  },
+  {
+    Icon: Mail,
+    label: "Email",
+    href: "mailto:m.ssaid356@gmail.com",
+    bgClass: "bg-[var(--social-instagram)]",
+  },
+  {
+    Icon: MessageSquare,
+    label: "WhatsApp",
+    href: "https://wa.me/+201067358073",
+    bgClass: "bg-[#25D366]",
+  },
 ];
 
-const footerLinks = [
-  { label: "Projects", to: "/projects" },
-  { label: "About", to: "/about" },
-  { label: "Skills", to: "/skills" },
-  { label: "Experience", to: "/experience" },
-  { label: "Contact", to: "/contact" },
+const footerNavLinks = [
+  { label: "WORKS", to: "/projects" },
+  { label: "ABOUT", to: "/about" },
+  { label: "AWARDS", to: "/experience" },
+  { label: "CONTACTS", to: "/contact" },
 ] as const;
 
 export function Footer() {
   return (
-    <footer className="px-5 pb-8 pt-4">
-      <div className="mx-auto max-w-6xl">
-        {/* Find me here panel */}
-        <div className="rounded-t-[2.5rem] bg-secondary/45 px-8 py-12 md:px-14">
-          <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:gap-6">
-            <h2 className="font-display text-4xl font-black uppercase leading-[0.9] tracking-tight text-foreground md:text-5xl">
-              You can find
-              <br />
-              me here:
-            </h2>
+    <footer className="w-full text-foreground font-sans select-none overflow-hidden pt-2">
+      {/* Stepped Top Edge Transition */}
+      <div className="w-full leading-none -mb-[1px] bg-transparent">
+        <svg
+          viewBox="0 0 1440 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-7 sm:h-9 md:h-11 fill-background"
+          preserveAspectRatio="none"
+        >
+          <path d="M0 40 V24 H160 C195 24 210 0 245 0 H1195 C1230 0 1245 24 1280 24 H1440 V40 Z" />
+        </svg>
+      </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-5">
-              {socials.map(({ Icon, label, href, tone, featured }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className={`group relative grid place-items-center rounded-[1.4rem] ring-4 ring-foreground transition-all duration-300 hover:-translate-y-2 ${tone} ${
-                    featured ? "size-20 scale-105 rounded-[1.7rem]" : "size-16"
-                  }`}
-                >
-                  <Icon
-                    className={`text-social-foreground ${featured ? "size-9" : "size-7"}`}
-                    strokeWidth={2.2}
-                  />
-                  {featured ? (
-                    <span className="absolute -bottom-3 grid size-7 place-items-center rounded-full bg-foreground">
-                      <Play className="size-3 fill-social-twitter text-social-twitter" />
-                    </span>
-                  ) : null}
-                </a>
-              ))}
+      {/* Main Footer Container */}
+      <div className="w-full bg-background pt-1 pb-10 px-4 sm:px-8 md:px-12">
+        <div className="mx-auto max-w-6xl">
+          {/* Inner Card Panel */}
+          <div className="relative rounded-[2.5rem] bg-card p-8 sm:p-10 md:p-14 border border-border shadow-[var(--shadow-glow)] mb-8 md:mb-12 overflow-hidden">
+            {/* Center Divider */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-border -translate-x-1/2 pointer-events-none" />
+
+            <div className="flex flex-col items-center justify-between gap-8 md:flex-row md:gap-6 relative z-10">
+              {/* Headline */}
+              <h2 className="font-['Oswald',sans-serif] text-4xl sm:text-5xl md:text-[56px] font-bold leading-[0.92] text-card-foreground tracking-normal text-center md:text-left">
+                You can find
+                <br />
+                me here:
+              </h2>
+
+              {/* Social Icons Row */}
+              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-5 py-1">
+                {socials.map(({ Icon, label, href, bgClass, featured }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className={`group relative grid place-items-center border-[3.5px] border-[var(--social-foreground)] shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${bgClass} ${
+                      featured
+                        ? "size-16 sm:size-20 md:size-[5rem] rounded-[1.5rem] md:rounded-[1.65rem] scale-105"
+                        : "size-13 sm:size-15 md:size-[4.15rem] rounded-[1.25rem] md:rounded-[1.4rem]"
+                    }`}
+                  >
+                    <Icon
+                      className={`text-[var(--social-foreground)] transition-transform duration-300 group-hover:scale-110 ${
+                        featured ? "size-8 sm:size-9" : "size-6 sm:size-7"
+                      }`}
+                      strokeWidth={2.2}
+                    />
+                    {featured && (
+                      <span className="absolute -bottom-3 grid size-6 sm:size-7 place-items-center rounded-full bg-card shadow-md border border-border">
+                        <Play className="size-3 sm:size-3.5 fill-primary text-primary ml-0.5" />
+                      </span>
+                    )}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Bottom bar */}
-        <div className="flex flex-col items-center gap-6 px-2 py-8 md:flex-row md:justify-between md:px-6">
-          <Link to="/" className="flex items-center gap-3" aria-label="Home">
-            <span className="grid size-11 place-items-center rounded-[0.35rem] bg-foreground">
-              <span className="font-display text-lg font-black leading-none text-background">
-                MS
-              </span>
-            </span>
-            <span className="eyebrow-wide text-foreground">
-              Market
+          {/* Bottom Bar */}
+          <div className="flex flex-col items-center justify-between gap-6 px-2 md:flex-row md:px-4">
+            {/* Logo & Brand Name */}
+            <Link to="/" className="flex items-center gap-3.5 group" aria-label="Home">
+              {/* Dot & Colon Prefix */}
+              <div className="flex items-end gap-[3px] select-none opacity-90">
+                <span className="size-1.5 rounded-full bg-foreground mb-[2px]" />
+                <div className="flex flex-col gap-[3px]">
+                  <span className="size-1.5 rounded-full bg-foreground" />
+                  <span className="size-1.5 rounded-full bg-foreground" />
+                </div>
+              </div>
+
+              {/* MS Square Badge */}
+              <div className="grid place-items-center rounded-[8px] bg-foreground px-2.5 py-1 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                <span className="font-['Oswald',sans-serif] text-xl sm:text-2xl font-bold leading-none text-background tracking-tighter">
+                  MS
+                </span>
+              </div>
+
+              {/* Spaced MOSTAFA SAMIR Text */}
+              <div className="flex flex-col text-left font-sans text-[10px] sm:text-[11px] font-black tracking-[0.22em] text-foreground leading-tight uppercase">
+                <span>MOSTAFA</span>
+                <span>SAMIR</span>
+              </div>
+            </Link>
+
+            {/* Navigation Links */}
+            <nav className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-10">
+              {footerNavLinks.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  className="font-sans text-xs sm:text-sm font-extrabold tracking-[0.25em] text-foreground transition-opacity duration-200 hover:opacity-75 uppercase"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Copyright */}
+            <p className="text-center md:text-right font-sans text-[10px] sm:text-[11px] font-bold tracking-[0.18em] text-foreground/80 uppercase leading-tight">
+              2024 | COPYRIGHT
               <br />
-              Place
-            </span>
-          </Link>
-
-          <nav className="flex flex-wrap items-center justify-center gap-7">
-            {footerLinks.map((item) => (
-              <Link
-                key={item.label}
-                to={item.to}
-                className="nav-label text-foreground transition-colors hover:text-accent"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          <p className="text-right eyebrow text-accent">
-            {new Date().getFullYear()} | Copyright
-            <br />
-            All rights reserved
-          </p>
+              ALL RIGHTS RESERVED
+            </p>
+          </div>
         </div>
       </div>
     </footer>

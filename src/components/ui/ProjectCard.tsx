@@ -23,21 +23,21 @@ export function ProjectCard({ project, index, view = "grid" }: ProjectCardProps)
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.97 }}
       transition={{ duration: 0.35, delay: Math.min(index, 6) * 0.04 }}
-      className="group glass relative flex h-full flex-col overflow-hidden rounded-3xl transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:glow-accent"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[2.5rem] bg-card border border-border p-6 shadow-[var(--shadow-glow)] transition-all duration-300 hover:-translate-y-2 hover:border-border/60 text-card-foreground"
     >
       <ProjectCardImage project={project} priority={index < 3} />
 
-      <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
+      <div className="flex flex-1 flex-col gap-4 pt-5">
         <header className="min-w-0">
           <div className="flex items-start justify-between gap-3">
-            <h3 className="min-w-0 text-lg font-bold leading-snug sm:text-xl">{project.title}</h3>
+            <h3 className="font-['Oswald',sans-serif] text-2xl font-bold leading-tight text-card-foreground">{project.title}</h3>
             {project.status && (
-              <span className="shrink-0 rounded-full border border-accent/25 bg-accent/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent">
+              <span className="shrink-0 rounded-full bg-primary px-3 py-0.5 text-[10px] font-black text-primary-foreground uppercase tracking-wider">
                 {project.status}
               </span>
             )}
           </div>
-          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-2 line-clamp-2 font-sans text-xs text-card-foreground/85 leading-relaxed">
             {project.description}
           </p>
         </header>
@@ -49,11 +49,11 @@ export function ProjectCard({ project, index, view = "grid" }: ProjectCardProps)
 
         <TechStackPreview techs={project.tech} />
 
-        <div className="mt-auto flex items-center justify-between gap-3 border-t border-border/60 pt-4">
+        <div className="mt-auto flex items-center justify-between gap-3 border-t border-border pt-4">
           <Link
             to="/projects/$id"
             params={{ id: project.id }}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-all hover:gap-3"
+            className="inline-flex items-center gap-2 font-sans text-xs font-black tracking-widest text-primary uppercase transition-all hover:gap-3"
           >
             View details
             <ArrowRight className="size-4" />
@@ -84,18 +84,18 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.98 }}
       transition={{ duration: 0.3, delay: Math.min(index, 6) * 0.03 }}
-      className="group glass grid grid-cols-1 gap-5 overflow-hidden rounded-3xl p-4 transition-all duration-300 hover:border-accent/40 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center"
+      className="group grid grid-cols-1 gap-5 overflow-hidden rounded-[2.2rem] bg-card p-5 border border-border shadow-lg text-card-foreground transition-all duration-300 hover:bg-card/90 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center"
     >
-      <div className="overflow-hidden rounded-2xl">
+      <div className="overflow-hidden rounded-[1.5rem]">
         <ProjectCardImage project={project} compact priority={index < 2} />
       </div>
       <div className="min-w-0">
         <div className="flex flex-wrap items-center gap-2">
-          <h3 className="text-lg font-bold">{project.title}</h3>
+          <h3 className="font-['Oswald',sans-serif] text-2xl font-bold text-card-foreground">{project.title}</h3>
           <Badge>{project.type}</Badge>
           {project.client && <Badge>{project.client}</Badge>}
         </div>
-        <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{project.description}</p>
+        <p className="mt-2 line-clamp-2 font-sans text-xs text-card-foreground/85 leading-relaxed">{project.description}</p>
         <div className="mt-3">
           <TechStackPreview techs={project.tech} limit={5} />
         </div>
@@ -103,7 +103,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           <Link
             to="/projects/$id"
             params={{ id: project.id }}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-all hover:gap-3"
+            className="inline-flex items-center gap-2 font-sans text-xs font-black tracking-widest text-primary uppercase transition-all hover:gap-3"
           >
             View details
             <ArrowRight className="size-4" />
@@ -139,7 +139,7 @@ function IconLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="inline-flex size-9 items-center justify-center rounded-xl border border-border bg-secondary/40 text-muted-foreground transition-all hover:border-accent/50 hover:text-accent"
+      className="inline-flex size-9 items-center justify-center rounded-xl bg-foreground/10 border border-border text-card-foreground transition-all hover:bg-foreground/20"
     >
       {children}
     </a>
@@ -152,17 +152,15 @@ interface BadgeProps {
 
 export function Badge({ children }: BadgeProps) {
   return (
-    <span className="chip">
+    <span className="rounded-full bg-primary px-3 py-1 font-sans text-[10px] font-black tracking-widest text-primary-foreground uppercase shadow-sm">
       {children}
     </span>
   );
 }
 
-
 interface ProjectCardImageProps {
   project: Project;
   compact?: boolean;
-  /** First few cards are close to the fold — load them eagerly. */
   priority?: boolean;
 }
 
@@ -172,7 +170,7 @@ export function ProjectCardImage({
   priority = false,
 }: ProjectCardImageProps) {
   return (
-    <div className={`relative overflow-hidden ${compact ? "h-36" : "h-48"}`}>
+    <div className={`relative overflow-hidden rounded-[1.75rem] border border-border ${compact ? "h-36" : "h-48"}`}>
       <SmartImage
         src={project.image}
         alt={`${project.title} preview`}
@@ -182,10 +180,10 @@ export function ProjectCardImage({
         priority={priority}
         fallbackStyle={project.gradient}
         className="size-full"
-        imgClassName="transition-transform duration-500 group-hover:scale-[1.06]"
+        imgClassName="transition-transform duration-700 ease-out group-hover:scale-110"
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-      <span className="absolute left-3 top-3 rounded-full border border-border/40 bg-background/70 px-3 py-1 text-[11px] font-semibold text-foreground backdrop-blur">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+      <span className="absolute left-3 top-3 rounded-full bg-black/40 backdrop-blur-md px-3 py-1 text-[9px] font-black tracking-wider text-white border border-white/20 uppercase">
         {project.category}
       </span>
     </div>
@@ -203,13 +201,13 @@ export function TechStackPreview({ techs, limit = 3 }: TechStackPreviewProps) {
       {techs.slice(0, limit).map((tech) => (
         <span
           key={tech}
-          className="rounded-md border border-border/50 bg-background/50 px-2 py-1 text-xs text-muted-foreground"
+          className="rounded-lg bg-foreground/10 border border-border px-2.5 py-1 text-xs font-semibold text-card-foreground/90"
         >
           {tech}
         </span>
       ))}
       {techs.length > limit && (
-        <span className="rounded-md border border-accent/20 bg-background/50 px-2 py-1 text-xs text-accent">
+        <span className="rounded-lg bg-primary/20 border border-primary/40 px-2.5 py-1 text-xs font-bold text-primary">
           +{techs.length - limit}
         </span>
       )}

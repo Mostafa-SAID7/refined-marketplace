@@ -1,13 +1,14 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { projects } from "@/data";
-import { ExternalLink, Github, ArrowLeft, Code2 } from "lucide-react";
-import { ProjectHero } from "@/components/ui/ProjectHero";
+import { ExternalLink, Github, ArrowLeft, ArrowRight, Code2, Globe, Database, Briefcase } from "lucide-react";
 import { TechStack } from "@/components/ui/TechStack";
 import { Badge } from "@/components/ui/ProjectCard";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ProjectDetailSkeleton } from "@/components/ui/Skeletons";
+import { SmartImage } from "@/components/ui/SmartImage";
+import { IMAGE_SIZES } from "@/lib/image";
 
 export const Route = createFileRoute("/projects/$id")({
   head: ({ params }) => {
@@ -33,11 +34,14 @@ export function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <div className="min-h-screen flex flex-col select-none">
         <Navbar />
-        <div className="flex-1 flex flex-col items-center justify-center py-32">
-          <h1 className="text-3xl font-bold mb-4">Project not found</h1>
-          <Link to="/projects" className="text-accent hover:underline flex items-center gap-2">
+        <div className="flex-1 flex flex-col items-center justify-center py-32 text-center">
+          <h1 className="font-display text-4xl font-bold text-foreground mb-4">Project Not Found</h1>
+          <Link
+            to="/projects"
+            className="inline-flex items-center gap-2 rounded-full bg-card px-6 py-3 font-sans text-xs font-black tracking-widest text-card-foreground uppercase shadow-md border border-border hover:scale-105 transition-transform"
+          >
             <ArrowLeft className="size-4" />
             Back to Projects
           </Link>
@@ -53,144 +57,218 @@ export function ProjectDetail() {
   const prevProject = projectIndex > 0 ? projects[projectIndex - 1] : null;
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-primary/30">
       <Navbar />
-      <main className="flex-1 pt-24 sm:pt-28">
+      
+      <main className="flex-1 pt-24 sm:pt-32 pb-24">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto max-w-7xl px-5 sm:px-8"
         >
-          {/* Hero Section */}
-          <ProjectHero project={project}>
-            {/* Back Button */}
-            <Link
-              to="/projects"
-              className="absolute left-4 top-4 z-10 sm:left-5 sm:top-6 flex items-center gap-2 rounded-full bg-background/90 px-4 py-2 text-sm font-semibold backdrop-blur hover:bg-background transition-colors"
+          {/* Breadcrumb */}
+          <div className="mb-12 md:mb-16">
+            <Link 
+              to="/projects" 
+              className="group inline-flex items-center gap-2 text-xs font-black tracking-widest uppercase text-foreground/60 hover:text-primary transition-colors"
             >
-              <ArrowLeft className="size-4" />
-              Back
+              <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
+              Back to all projects
             </Link>
-          </ProjectHero>
-
-          {/* Content */}
-          <div className="mx-auto max-w-4xl px-4 py-12 sm:px-5 sm:py-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              {/* Header */}
-              <div className="mb-8">
-                <div className="mb-4 flex flex-wrap gap-2">
-                  <Badge>{project.category}</Badge>
-                  <Badge>{project.type}</Badge>
-                  {project.status && <Badge>{project.status}</Badge>}
-                </div>
-                <h1 className="mb-4 break-words text-3xl font-bold sm:text-4xl md:text-5xl">{project.title}</h1>
-                <p className="text-lg text-muted-foreground">{project.description}</p>
-              </div>
-
-              {/* Meta Info Grid */}
-              <div className="mb-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {project.client && (
-                  <div className="panel">
-                    <div className="text-xs font-semibold text-muted-foreground mb-1">CLIENT</div>
-                    <div className="text-lg font-semibold">{project.client}</div>
-                  </div>
-                )}
-                {project.database && (
-                  <div className="panel">
-                    <div className="text-xs font-semibold text-muted-foreground mb-1">DATABASE</div>
-                    <div className="text-lg font-semibold">{project.database}</div>
-                  </div>
-                )}
-                <div className="panel">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Code2 className="size-3.5 text-accent" />
-                    <div className="text-xs font-semibold text-muted-foreground">TECH STACK</div>
-                  </div>
-                  <div className="text-lg font-semibold">{project.tech.length} Tools</div>
-                </div>
-                <div className="panel">
-                  <div className="flex items-center gap-2 mb-1">
-                    <ExternalLink className="size-3.5 text-accent" />
-                    <div className="text-xs font-semibold text-muted-foreground">STATUS</div>
-                  </div>
-                  <div className="text-lg font-semibold">{hasLiveSite ? "Live" : "Archived"}</div>
-                </div>
-              </div>
-
-              {/* Links */}
-              <div className="mb-12 flex flex-wrap gap-4">
-                {hasLiveSite && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-lg bg-accent text-background px-6 py-3 font-semibold transition-all hover:shadow-lg hover:shadow-accent/50 hover:-translate-y-0.5"
-                  >
-                    <ExternalLink className="size-4" />
-                    Visit Live Site
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 rounded-lg border border-border bg-secondary/40 px-6 py-3 font-semibold transition-all hover:border-accent/50 hover:text-accent"
-                  >
-                    <Github className="size-4" />
-                    View Source Code
-                  </a>
-                )}
-              </div>
-
-              {/* Tech Stack */}
-              <TechStack techs={project.tech} className="mb-12" />
-
-              {/* Navigation */}
-              <div className="border-t border-border pt-12">
-                <div className="grid gap-6 sm:grid-cols-2">
-                  {prevProject ? (
-                    <Link
-                      to="/projects/$id"
-                      params={{ id: prevProject.id }}
-                      className="group glass rounded-xl p-6 transition-all hover:border-accent/50 hover:glow-accent"
-                    >
-                      <div className="text-xs font-semibold text-muted-foreground mb-2">
-                        ← PREVIOUS PROJECT
-                      </div>
-                      <h3 className="text-lg font-bold group-hover:text-accent transition-colors">
-                        {prevProject.title}
-                      </h3>
-                    </Link>
-                  ) : (
-                    <div />
-                  )}
-                  {nextProject ? (
-                    <Link
-                      to="/projects/$id"
-                      params={{ id: nextProject.id }}
-                      className="group glass rounded-xl p-6 transition-all hover:border-accent/50 hover:glow-accent text-right sm:text-left"
-                    >
-                      <div className="text-xs font-semibold text-muted-foreground mb-2">
-                        NEXT PROJECT →
-                      </div>
-                      <h3 className="text-lg font-bold group-hover:text-accent transition-colors">
-                        {nextProject.title}
-                      </h3>
-                    </Link>
-                  ) : (
-                    <div />
-                  )}
-                </div>
-              </div>
-            </motion.div>
           </div>
+
+          {/* Immersive Typography Header */}
+          <header className="mb-16 md:mb-24">
+            <div className="flex flex-wrap gap-2 mb-8">
+              <Badge className="bg-primary/10 text-primary border-primary/20">{project.category}</Badge>
+              <Badge className="bg-foreground/5 text-foreground/70">{project.type}</Badge>
+              {project.status && <Badge className="bg-foreground/5 text-foreground/70">{project.status}</Badge>}
+            </div>
+            
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tight leading-[0.9] mb-8">
+              {project.title}
+            </h1>
+            
+            <p className="text-xl md:text-2xl lg:text-3xl font-light text-foreground/70 max-w-4xl leading-relaxed">
+              {project.description}
+            </p>
+          </header>
+
+          {/* Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Left Column: Main Content */}
+            <div className="lg:col-span-8 space-y-16">
+              
+              {/* Elevated Showcase Mockup */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative rounded-[2.5rem] overflow-hidden bg-card border border-border shadow-2xl group"
+              >
+                {/* Decorative browser dots */}
+                <div className="absolute top-0 inset-x-0 h-12 bg-foreground/5 border-b border-border/50 flex items-center px-6 gap-2 z-10 backdrop-blur-md">
+                  <div className="size-3 rounded-full bg-foreground/20"></div>
+                  <div className="size-3 rounded-full bg-foreground/20"></div>
+                  <div className="size-3 rounded-full bg-foreground/20"></div>
+                </div>
+                
+                <div className="pt-12 aspect-[16/10] sm:aspect-[16/9]">
+                  <SmartImage
+                    src={project.image}
+                    alt={`${project.title} showcase`}
+                    width={1280}
+                    height={800}
+                    sizes={IMAGE_SIZES.hero}
+                    priority
+                    fallbackStyle={project.gradient}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Technical Implementation Section */}
+              <section className="pt-8">
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="p-3 bg-primary/10 rounded-2xl text-primary">
+                    <Code2 className="size-8" />
+                  </div>
+                  <h2 className="font-display text-3xl md:text-4xl font-black uppercase">
+                    Architecture & Tech
+                  </h2>
+                </div>
+                <div className="bg-card border border-border p-8 rounded-[2rem] shadow-[var(--shadow-glow)]">
+                  <TechStack techs={project.tech} />
+                </div>
+              </section>
+              
+            </div>
+
+            {/* Right Column: Sticky Sidebar */}
+            <aside className="lg:col-span-4 space-y-8 lg:sticky lg:top-32">
+              
+              {/* Project Brief Card */}
+              <div className="bg-card border border-border rounded-[2rem] p-8 md:p-10 shadow-2xl relative overflow-hidden">
+                {/* Subtle background glow */}
+                <div className="absolute -top-24 -right-24 size-64 bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
+                
+                <h3 className="font-display text-2xl font-black uppercase mb-8 tracking-wide">Project Brief</h3>
+                
+                <div className="space-y-8 relative z-10">
+                  {project.client && (
+                    <div className="flex items-start gap-5">
+                      <div className="mt-1 bg-foreground/5 p-2.5 rounded-xl text-primary border border-border/50">
+                        <Briefcase className="size-5" />
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-black tracking-widest uppercase text-foreground/50 mb-1.5">Client</div>
+                        <div className="font-bold text-lg">{project.client}</div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {project.database && (
+                    <div className="flex items-start gap-5">
+                      <div className="mt-1 bg-foreground/5 p-2.5 rounded-xl text-primary border border-border/50">
+                        <Database className="size-5" />
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-black tracking-widest uppercase text-foreground/50 mb-1.5">Database Engine</div>
+                        <div className="font-bold text-lg">{project.database}</div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="flex items-start gap-5">
+                    <div className="mt-1 bg-foreground/5 p-2.5 rounded-xl text-primary border border-border/50">
+                      <Globe className="size-5" />
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-black tracking-widest uppercase text-foreground/50 mb-1.5">Launch Status</div>
+                      <div className="font-bold text-lg">{hasLiveSite ? "Live in Production" : "Archived / Local"}</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Actions */}
+                <div className="mt-12 space-y-3 relative z-10">
+                  {hasLiveSite && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group w-full inline-flex justify-center items-center gap-3 rounded-full bg-primary px-6 py-4 font-sans text-xs font-black tracking-widest text-primary-foreground uppercase shadow-lg hover:shadow-primary/25 transition-all hover:scale-[1.02]"
+                    >
+                      <ExternalLink className="size-4" />
+                      Visit Live Site
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group w-full inline-flex justify-center items-center gap-3 rounded-full border border-border bg-foreground/5 px-6 py-4 font-sans text-xs font-black tracking-widest text-foreground uppercase hover:bg-foreground/10 transition-all"
+                    >
+                      <Github className="size-4" />
+                      View Source Code
+                    </a>
+                  )}
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          {/* Enhanced Prev/Next Navigation */}
+          <div className="mt-32 pt-16 border-t border-border">
+            <h3 className="text-center font-display text-2xl font-black uppercase text-foreground/50 mb-12">Continue Exploring</h3>
+            <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
+              {prevProject ? (
+                <Link
+                  to="/projects/$id"
+                  params={{ id: prevProject.id }}
+                  className="group relative overflow-hidden rounded-[2rem] bg-card p-8 border border-border shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl hover:border-primary/50"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative z-10">
+                    <div className="flex items-center gap-2 font-sans text-[10px] font-black tracking-widest text-primary uppercase mb-3">
+                      <ArrowLeft className="size-3" /> PREVIOUS PROJECT
+                    </div>
+                    <h4 className="font-display text-2xl md:text-3xl font-black uppercase text-card-foreground">
+                      {prevProject.title}
+                    </h4>
+                  </div>
+                </Link>
+              ) : (
+                <div />
+              )}
+              {nextProject ? (
+                <Link
+                  to="/projects/$id"
+                  params={{ id: nextProject.id }}
+                  className="group relative overflow-hidden rounded-[2rem] bg-card p-8 border border-border shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl hover:border-primary/50 text-right"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-l from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative z-10 flex flex-col items-end">
+                    <div className="flex items-center gap-2 font-sans text-[10px] font-black tracking-widest text-primary uppercase mb-3">
+                      NEXT PROJECT <ArrowRight className="size-3" />
+                    </div>
+                    <h4 className="font-display text-2xl md:text-3xl font-black uppercase text-card-foreground">
+                      {nextProject.title}
+                    </h4>
+                  </div>
+                </Link>
+              ) : (
+                <div />
+              )}
+            </div>
+          </div>
+          
         </motion.div>
       </main>
+      
       <Footer />
     </div>
   );

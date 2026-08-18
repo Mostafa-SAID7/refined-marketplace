@@ -31,20 +31,20 @@ export function Contact({ showHeading = true }: { showHeading?: boolean } = {}) 
   };
 
   const fieldClass =
-    "w-full rounded-xl border border-border bg-secondary/40 px-4 py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-accent/60";
+    "w-full rounded-xl border border-border bg-foreground/10 px-4 py-3 text-foreground outline-none transition-colors placeholder:text-foreground/50 focus:border-primary/60 focus:bg-foreground/15";
 
   return (
-    <section id="contact" className="scroll-mt-24 bg-secondary/20 py-28">
+    <section id="contact" className="scroll-mt-24 py-28">
       <div className="mx-auto max-w-2xl px-5">
         {showHeading && <SectionHeading title={tr("contact.title")} />}
         <Reveal>
-          <p className="mb-10 text-center text-muted-foreground">{tr("contact.subtitle")}</p>
+          <p className="mb-10 text-center text-foreground/70">{tr("contact.subtitle")}</p>
         </Reveal>
 
         <Reveal>
-          <form onSubmit={handleSubmit(onSubmit)} className="glass space-y-5 rounded-2xl p-7">
+          <form onSubmit={handleSubmit(onSubmit)} className="rounded-[2rem] bg-card border border-border shadow-[var(--shadow-glow)] space-y-5 p-7">
             <div>
-              <label className="mb-2 block text-sm font-medium">{tr("contact.name")}</label>
+              <label className="mb-2 block text-sm font-medium text-card-foreground">{tr("contact.name")}</label>
               <input {...register("name")} className={fieldClass} placeholder="Jane Doe" />
               {errors.name && (
                 <p className="mt-1.5 text-sm text-destructive">{errors.name.message}</p>
@@ -52,7 +52,7 @@ export function Contact({ showHeading = true }: { showHeading?: boolean } = {}) 
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-medium">{tr("contact.email")}</label>
+              <label className="mb-2 block text-sm font-medium text-card-foreground">{tr("contact.email")}</label>
               <input {...register("email")} className={fieldClass} placeholder="jane@company.com" />
               {errors.email && (
                 <p className="mt-1.5 text-sm text-destructive">{errors.email.message}</p>
@@ -60,7 +60,7 @@ export function Contact({ showHeading = true }: { showHeading?: boolean } = {}) 
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-medium">{tr("contact.message")}</label>
+              <label className="mb-2 block text-sm font-medium text-card-foreground">{tr("contact.message")}</label>
               <textarea
                 {...register("message")}
                 rows={5}
@@ -75,7 +75,7 @@ export function Contact({ showHeading = true }: { showHeading?: boolean } = {}) 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="group btn-accent w-full"
+              className="group w-full inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-sans text-sm font-black tracking-widest text-primary-foreground uppercase shadow-md transition-all hover:scale-105 disabled:opacity-60"
             >
               {tr("contact.send")}
               <Send className="size-4 transition-transform group-hover:translate-x-0.5" />

@@ -1,154 +1,156 @@
-import { useEffect, useState } from "react";
-import { Menu, X, Github, Linkedin, Twitter } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { Menu, X, Github, Linkedin, Sun, Moon, Globe } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { useTheme } from "@/lib/theme";
 import { useI18n } from "@/lib/i18n";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { LangToggle } from "@/components/ui/LangToggle";
 
-type NavLink = {
-  id: string;
-  key: string;
-  to: "/" | "/projects" | "/about" | "/skills" | "/experience" | "/contact";
-};
-
-const links: NavLink[] = [
-  { id: "projects", key: "nav.projects", to: "/projects" },
-  { id: "about", key: "nav.about", to: "/about" },
-  { id: "skills", key: "nav.skills", to: "/skills" },
-  { id: "experience", key: "nav.experience", to: "/experience" },
-  { id: "contact", key: "nav.contact", to: "/contact" },
-];
-
-const socials = [
-  { Icon: Github, href: "https://github.com/Mostafa-SAID7", label: "GitHub" },
-  { Icon: Linkedin, href: "#", label: "LinkedIn" },
-  { Icon: Twitter, href: "#", label: "Twitter" },
-];
-
-function NavItem({
-  link,
-  onClick,
-  className,
-  children,
-}: {
-  link: NavLink;
-  onClick: () => void;
-  className: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <Link
-      to={link.to}
-      onClick={onClick}
-      className={className}
-      activeOptions={{ exact: link.to === "/" }}
-      activeProps={{ "data-active": "true", "aria-current": "page" }}
-    >
-      {children}
-    </Link>
-  );
-}
+const navLinks = [
+  { label: "WORKS", to: "/projects" },
+  { label: "ABOUT", to: "/about" },
+  { label: "AWARDS", to: "/experience" },
+  { label: "CONTACTS", to: "/contact" },
+] as const;
 
 export function Navbar() {
-  const { tr } = useI18n();
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { theme, toggleTheme } = useTheme();
+  const { lang, toggleLang } = useI18n();
 
   return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.21, 0.5, 0.3, 1] }}
-      className="fixed inset-x-0 top-4 z-50 px-4"
-    >
-      <nav
-        className={`mx-auto flex max-w-6xl items-center justify-between rounded-3xl px-3 py-3 transition-all duration-300 ${
-          scrolled ? "glass backdrop-blur-md" : "bg-card/40"
-        }`}
-      >
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 pb-2 bg-background border-b border-border transition-colors duration-300">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between">
+        {/* Left: Logo Badge Pill */}
         <Link
           to="/"
-          className="group flex items-center gap-3 rounded-2xl bg-foreground/95 px-4 py-2.5 transition-transform hover:scale-[1.03]"
+          className="group flex items-center gap-2.5 rounded-full bg-card text-card-foreground px-4 py-2 shadow-md border border-border transition-transform hover:scale-105 select-none"
+          aria-label="Home"
         >
-          <span className="font-display text-xl font-black leading-none text-background">MS</span>
-          <span className="eyebrow text-background/80">
-            Market
-            <br />
-            Place
-          </span>
+          {/* Prefix dots */}
+          <div className="flex items-end gap-[2px] opacity-90">
+            <span className="size-1 rounded-full bg-[#FF4B35] mb-[1px]" />
+            <div className="flex flex-col gap-[2px]">
+              <span className="size-1 rounded-full bg-[#FF4B35]" />
+              <span className="size-1 rounded-full bg-[#FF4B35]" />
+            </div>
+          </div>
+
+          {/* MS Red Square */}
+          <div className="grid place-items-center rounded-[5px] bg-[#FF4B35] px-2 py-0.5 shadow-sm">
+            <span className="font-['Oswald',sans-serif] text-sm font-bold leading-none text-white tracking-tighter">
+              MS
+            </span>
+          </div>
+
+          {/* MOSTAFA SAMIR Text */}
+          <div className="flex flex-col text-left font-sans text-[9px] font-black tracking-[0.2em] text-foreground leading-tight uppercase">
+            <span>MOSTAFA</span>
+            <span>SAMIR</span>
+          </div>
         </Link>
 
-        <div className="hidden items-center gap-5 lg:flex xl:gap-8">
-          {links.map((l) => (
-            <NavItem
-              key={l.id}
-              link={l}
-              onClick={() => setOpen(false)}
-              className="relative nav-label text-foreground/85 transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:text-accent hover:after:origin-left hover:after:scale-x-100 data-[active=true]:text-accent data-[active=true]:after:origin-left data-[active=true]:after:scale-x-100"
+        {/* Center: Nav Links */}
+        <div className="hidden items-center gap-8 md:flex">
+          {navLinks.map((l) => (
+            <Link
+              key={l.label}
+              to={l.to}
+              className="font-sans text-xs font-extrabold tracking-[0.25em] text-foreground transition-opacity hover:opacity-75 uppercase"
             >
-              {tr(l.key)}
-            </NavItem>
+              {l.label}
+            </Link>
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="hidden items-center gap-2 xl:flex">
-            {socials.map(({ Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="grid size-9 place-items-center rounded-full border border-border text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent"
-              >
-                <Icon className="size-4" />
-              </a>
-            ))}
+        {/* Right: Controls & Social Icons */}
+        <div className="flex items-center gap-2.5">
+          {/* Theme Toggle Button */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="grid size-9 place-items-center rounded-full bg-foreground/10 border border-border text-foreground transition-all hover:bg-foreground/20 hover:scale-105"
+            title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            {theme === "dark" ? <Sun className="size-4 text-[#FFD000]" /> : <Moon className="size-4 text-[#FF4B35]" />}
+          </button>
+
+          {/* Language Switcher */}
+          <button
+            onClick={toggleLang}
+            aria-label="Toggle language"
+            className="flex h-9 items-center gap-1.5 rounded-full bg-foreground/10 border border-border px-3 text-xs font-extrabold text-foreground transition-all hover:bg-foreground/20 hover:scale-105"
+            title="Switch Language"
+          >
+            <Globe className="size-3.5 text-[#FF4B35]" />
+            <span className="uppercase">{lang === "en" ? "AR" : "EN"}</span>
+          </button>
+
+          {/* Social Icons: GitHub & LinkedIn */}
+          <div className="hidden items-center gap-2 sm:flex">
+            <a
+              href="https://github.com/Mostafa-SAID7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="grid size-9 place-items-center rounded-full bg-foreground/10 border border-border text-foreground transition-all hover:bg-foreground/20 hover:scale-105"
+              aria-label="GitHub Profile"
+            >
+              <Github className="size-4" />
+            </a>
+            <a
+              href="https://linkedin.com/in/mostafasamirsaid"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="grid size-9 place-items-center rounded-full bg-foreground/10 border border-border text-foreground transition-all hover:bg-foreground/20 hover:scale-105"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin className="size-4" />
+            </a>
           </div>
-          <LangToggle />
-          <ThemeToggle />
+
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setOpen((o) => !o)}
             aria-label="Menu"
-            className="grid size-10 place-items-center rounded-full border border-border lg:hidden"
+            className="grid size-10 place-items-center rounded-full bg-foreground/10 border border-border text-foreground md:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
       </nav>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden px-1 pb-4 lg:hidden"
-          >
-            <div className="mx-auto mt-2 flex max-h-[70vh] max-w-6xl flex-col gap-1 overflow-y-auto overscroll-contain rounded-3xl border border-border bg-card p-3 shadow-2xl backdrop-blur-xl [-webkit-mask-image:-webkit-radial-gradient(white,black)]">
-              {links.map((l) => (
-                <NavItem
-                  key={l.id}
-                  link={l}
-                  onClick={() => setOpen(false)}
-                  className="rounded-2xl px-4 py-3 text-start text-sm font-bold uppercase tracking-[0.16em] text-foreground transition-colors hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground"
-                >
-                  {tr(l.key)}
-                </NavItem>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.header>
+      {/* Mobile Drawer */}
+      {open && (
+        <div className="mx-auto mt-3 flex max-w-6xl flex-col gap-2 rounded-[2rem] bg-card text-card-foreground p-5 md:hidden border border-border shadow-xl">
+          {navLinks.map((l) => (
+            <Link
+              key={l.label}
+              to={l.to}
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-4 py-2.5 text-start font-sans text-xs font-black tracking-[0.2em] uppercase text-foreground hover:bg-foreground/10"
+            >
+              {l.label}
+            </Link>
+          ))}
+          <div className="flex items-center gap-3 pt-3 border-t border-border mt-1 px-4">
+            <a
+              href="https://github.com/Mostafa-SAID7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-sans text-xs font-bold text-foreground hover:opacity-75"
+            >
+              <Github className="size-4" /> GitHub
+            </a>
+            <span className="opacity-30">|</span>
+            <a
+              href="https://linkedin.com/in/mostafasamirsaid"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-sans text-xs font-bold text-foreground hover:opacity-75"
+            >
+              <Linkedin className="size-4" /> LinkedIn
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }

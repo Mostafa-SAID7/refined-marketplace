@@ -19,8 +19,9 @@ export function ProjectHero({ project, children }: ProjectHeroProps) {
         priority
         fallbackStyle={project.gradient}
         className="size-full"
+        imgClassName="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-background/70" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-black/40 to-black/70" />
       {children}
     </div>
   );

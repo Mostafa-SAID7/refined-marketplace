@@ -1,72 +1,41 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { Reveal } from "@/components/ui/Reveal";
-import { Experience } from "@/components/sections/Experience";
-import { experience } from "@/data";
-import { PageSkeleton } from "@/components/ui/Skeletons";
+import { ExperiencePreview } from "@/components/sections/home/ExperiencePreview";
 
 export const Route = createFileRoute("/experience")({
   head: () => ({
     meta: [
-      { title: "Experience — Marketplace Systems Architect" },
+      { title: "Experience — Mostafa Samir | Senior Full Stack Engineer" },
       {
         name: "description",
         content:
-          "A decade of roles shipping multi-vendor marketplaces, .NET microservices, real-time telemetry and multi-tenant commerce platforms.",
+          "Professional software engineering experience of Mostafa Samir — .NET 8 Microservices, SignalR IoT telemetry, and multi-tenant marketplace architectures.",
       },
-      { property: "og:title", content: "Experience — Marketplace Systems Architect" },
-      {
-        property: "og:description",
-        content:
-          "Full timeline of roles, responsibilities and measurable outcomes across marketplace and commerce engineering.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/experience" }],
   }),
   component: ExperiencePage,
-  pendingComponent: PageSkeleton,
 });
 
 function ExperiencePage() {
-  const roles = experience.length;
-
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen select-none pt-24 pb-12 overflow-x-hidden">
       <Navbar />
-      <main>
-        <PageHeader
-          kicker={`${roles} roles · 10+ years`}
-          title="Experience"
-          subtitle="The full timeline — what I owned, what I built and what it moved."
-        />
-
-        <Experience showHeading={false} />
-
-        <section className="px-5 pb-24">
-          <Reveal>
-            <div className="mx-auto flex max-w-5xl flex-wrap gap-3">
-              <Link
-                to="/projects"
-                className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-semibold transition-colors hover:border-accent/50 hover:text-accent"
-              >
-                See the work
-                <ArrowRight className="size-4" />
-              </Link>
-              <Link
-                to="/contact"
-                className="btn-accent"
-              >
-                Work with me
-                <ArrowRight className="size-4" />
-              </Link>
-            </div>
-          </Reveal>
+      <main className="mx-auto max-w-6xl px-4 sm:px-8 md:px-12">
+        <section className="py-12 text-center">
+          <span className="rounded-full bg-foreground/10 px-4 py-1.5 font-sans text-xs font-black tracking-[0.25em] text-primary uppercase border border-border inline-block mb-4">
+            CAREER & MILESTONES
+          </span>
+          <h1 className="font-['Oswald',sans-serif] text-5xl sm:text-6xl md:text-7xl font-bold text-foreground tracking-tight uppercase leading-tight mb-4">
+            Professional Experience
+          </h1>
+          <p className="font-sans text-sm sm:text-base text-foreground/90 max-w-xl mx-auto leading-relaxed">
+            Roles, responsibilities, and measurable engineering outcomes across enterprise marketplace systems.
+          </p>
         </section>
+
+        <ExperiencePreview />
       </main>
       <Footer />
     </div>

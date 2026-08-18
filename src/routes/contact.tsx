@@ -1,70 +1,75 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, MapPin, Clock } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { PageHeader } from "@/components/ui/PageHeader";
-import { Reveal } from "@/components/ui/Reveal";
 import { Contact } from "@/components/sections/Contact";
-import { PageSkeleton } from "@/components/ui/Skeletons";
 
 const channels = [
-  { Icon: Mail, label: "Email", value: "hello@example.com", href: "mailto:hello@example.com" },
-  { Icon: MapPin, label: "Based in", value: "Cairo · Remote worldwide" },
-  { Icon: Clock, label: "Response time", value: "Within 24 hours" },
+  { Icon: Mail, label: "Email", value: "m.ssaid356@gmail.com", href: "mailto:m.ssaid356@gmail.com" },
+  { Icon: Phone, label: "WhatsApp / Phone", value: "+20 106 735 8073", href: "https://wa.me/+201067358073" },
+  { Icon: MapPin, label: "Location", value: "Tanta / Cairo, Egypt · Remote Worldwide" },
 ];
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Start a Marketplace Project" },
+      { title: "Contact — Mostafa Samir | Senior Full Stack Engineer" },
       {
         name: "description",
         content:
-          "Tell me about your marketplace, platform or commerce system and I'll come back with a concrete plan within 24 hours.",
+          "Get in touch with Mostafa Samir for marketplace engineering, .NET 8 Microservices, or full-stack web applications.",
       },
-      { property: "og:title", content: "Contact — Start a Marketplace Project" },
-      {
-        property: "og:description",
-        content: "Send a brief and get a concrete architecture and delivery plan back.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
   }),
   component: ContactPage,
-  pendingComponent: PageSkeleton,
 });
 
 function ContactPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen select-none pt-24 pb-12 overflow-x-hidden">
       <Navbar />
-      <main>
-        <PageHeader
-          kicker="Available for new work"
-          title="Get in Touch"
-          subtitle="Share the scope, the stack and the timeline — you'll get an honest answer, not a sales pitch."
-        />
+      <main className="mx-auto max-w-6xl px-4 sm:px-8 md:px-12">
+        {/* Banner */}
+        <section className="py-12 text-center">
+          <span className="rounded-full bg-foreground/10 px-4 py-1.5 font-sans text-xs font-black tracking-[0.25em] text-primary uppercase border border-border inline-block mb-4">
+            AVAILABLE FOR NEW PROJECTS
+          </span>
+          <h1 className="font-['Oswald',sans-serif] text-5xl sm:text-6xl md:text-7xl font-bold text-foreground tracking-tight uppercase leading-tight mb-4">
+            Get In Touch
+          </h1>
+          <p className="font-sans text-sm sm:text-base text-foreground/90 max-w-xl mx-auto leading-relaxed">
+            Share your project requirements, tech stack, or timeline — I respond within 24 hours.
+          </p>
+        </section>
 
-        <section className="px-5 pb-4">
-          <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-3">
-            {channels.map(({ Icon, label, value, href }, i) => (
-              <Reveal key={label} delay={i * 0.07}>
-                <div className="glass h-full rounded-2xl p-6">
-                  <Icon className="size-5 text-accent" />
-                  <div className="mt-4 eyebrow text-muted-foreground">
-                    {label}
-                  </div>
-                  {href ? (
-                    <a href={href} className="mt-1 block font-semibold hover:text-accent">
-                      {value}
-                    </a>
-                  ) : (
-                    <div className="mt-1 font-semibold">{value}</div>
-                  )}
+        {/* Contact Channels Grid */}
+        <section className="py-6 mb-8">
+          <div className="grid gap-6 sm:grid-cols-3">
+            {channels.map(({ Icon, label, value, href }) => (
+              <div
+                key={label}
+                className="rounded-[2.5rem] bg-card p-7 border border-border shadow-lg text-center flex flex-col items-center justify-center hover:-translate-y-1 transition-transform"
+              >
+                <div className="grid size-12 place-items-center rounded-full bg-foreground/10 text-card-foreground mb-4 border border-border">
+                  <Icon className="size-5 text-primary" />
                 </div>
-              </Reveal>
+                <span className="font-sans text-[10px] font-black tracking-[0.2em] text-card-foreground/80 uppercase mb-1">
+                  {label}
+                </span>
+                {href ? (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-sans text-sm font-bold text-card-foreground hover:text-primary transition-colors break-all"
+                  >
+                    {value}
+                  </a>
+                ) : (
+                  <span className="font-sans text-sm font-bold text-card-foreground">{value}</span>
+                )}
+              </div>
             ))}
           </div>
         </section>

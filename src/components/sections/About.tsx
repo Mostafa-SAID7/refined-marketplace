@@ -25,7 +25,7 @@ export function About() {
         <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08}>
-              <div className="glass rounded-2xl p-6 text-center transition-transform hover:-translate-y-1">
+              <div className="bg-card border border-border rounded-[2rem] p-6 text-center shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-1">
                 <div className="text-3xl font-extrabold text-accent">{s.value}</div>
                 <div className="mt-1 text-sm text-muted-foreground">{s.label}</div>
               </div>

@@ -61,7 +61,7 @@ export function Experience({ showHeading = true }: { showHeading?: boolean } = {
                 className={`ml-14 sm:ml-24 md:w-1/2 ${index % 2 === 1 ? "md:ml-auto md:mr-0 md:pr-12" : "md:ml-0 md:pl-12"}`}
               >
                 <Reveal delay={index * 0.1}>
-                  <div className="group glass relative overflow-hidden rounded-2xl bg-gradient-to-br from-card/50 via-card to-card/30 p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-accent/10 sm:p-6 md:p-8">
+                  <div className="group bg-card border border-border relative overflow-hidden rounded-[2rem] p-4 shadow-[var(--shadow-glow)] transition-all duration-300 hover:-translate-y-2 sm:p-6 md:p-8">
                     {/* Accent corner */}
                     <div className="absolute -right-12 -top-12 size-32 rounded-full bg-accent/5 blur-3xl transition-all duration-500 group-hover:bg-accent/10" />
 
@@ -148,7 +148,7 @@ export function Experience({ showHeading = true }: { showHeading?: boolean } = {
           ].map((stat) => (
             <div
               key={stat.labelKey}
-              className="glass rounded-xl border border-accent/10 bg-gradient-to-br from-card/40 to-card/20 px-2 py-5 text-center sm:px-4 sm:py-6 md:px-6 md:py-8"
+              className="bg-card border border-border rounded-[2rem] px-2 py-5 text-center shadow-[var(--shadow-glow)] sm:px-4 sm:py-6 md:px-6 md:py-8"
             >
               <p className="text-xl font-bold text-accent sm:text-2xl md:text-3xl">{stat.value}</p>
               <p className="mt-1 break-words text-[10px] uppercase tracking-wide text-muted-foreground sm:text-xs sm:tracking-wider md:text-sm">

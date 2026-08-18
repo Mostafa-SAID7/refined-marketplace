@@ -10,14 +10,14 @@ export function SkillsPreview() {
   const featured = skillGroups.slice(0, 4);
 
   return (
-    <section id="skills" className="scroll-mt-24 bg-secondary/20 py-24">
+    <section id="skills" className="scroll-mt-24 bg-background py-24">
       <div className="mx-auto max-w-5xl px-5">
         <SectionHeading title={tr("skills.title")} />
 
         <div className="grid gap-4 sm:grid-cols-2">
           {featured.map((group, i) => (
             <Reveal key={group.title} delay={i * 0.08}>
-              <div className="glass h-full rounded-2xl p-6 transition-transform hover:-translate-y-1">
+              <div className="bg-card border border-border h-full rounded-[2rem] p-6 shadow-[var(--shadow-glow)] transition-transform hover:-translate-y-1">
                 <h3 className="mb-4 flex items-center gap-3 text-lg font-bold">
                   <span className="size-2 rounded-full bg-accent" />
                   {group.title}
@@ -26,7 +26,7 @@ export function SkillsPreview() {
                   {group.skills.slice(0, 5).map((skill) => (
                     <span
                       key={skill}
-                      className="rounded-full border border-border bg-background/40 px-3 py-1.5 text-sm text-muted-foreground"
+                      className="rounded-full border border-border bg-foreground/10 px-3 py-1.5 text-sm text-foreground/80"
                     >
                       {skill}
                     </span>

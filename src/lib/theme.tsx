@@ -20,8 +20,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.remove("dark", "light");
-    root.classList.add(theme);
+    // Default (:root) = coral/dark. Only .light class needed for light mode.
+    if (theme === "light") {
+      root.classList.add("light");
+    } else {
+      root.classList.remove("light");
+    }
     localStorage.setItem("theme", theme);
   }, [theme]);
 

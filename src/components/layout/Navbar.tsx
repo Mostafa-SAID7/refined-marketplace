@@ -79,7 +79,7 @@ export function Navbar() {
           className="group flex items-center gap-3 rounded-2xl bg-foreground/95 px-4 py-2.5 transition-transform hover:scale-[1.03]"
         >
           <span className="font-display text-xl font-black leading-none text-background">MS</span>
-          <span className="text-[10px] font-bold uppercase leading-3 tracking-[0.2em] text-background/80">
+          <span className="eyebrow text-background/80">
             Market
             <br />
             Place
@@ -92,7 +92,7 @@ export function Navbar() {
               key={l.id}
               link={l}
               onClick={() => setOpen(false)}
-              className="relative text-xs font-bold uppercase tracking-[0.18em] text-foreground/85 transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:text-accent hover:after:origin-left hover:after:scale-x-100 data-[active=true]:text-accent data-[active=true]:after:origin-left data-[active=true]:after:scale-x-100"
+              className="relative nav-label text-foreground/85 transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:origin-right after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:text-accent hover:after:origin-left hover:after:scale-x-100 data-[active=true]:text-accent data-[active=true]:after:origin-left data-[active=true]:after:scale-x-100"
             >
               {tr(l.key)}
             </NavItem>

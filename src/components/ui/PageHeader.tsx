@@ -17,7 +17,7 @@ export function PageHeader({
         <Reveal>
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-accent"
+            className="inline-flex items-center gap-1.5 eyebrow text-muted-foreground transition-colors hover:text-accent"
           >
             <ChevronLeft className="size-4" />
             Back home

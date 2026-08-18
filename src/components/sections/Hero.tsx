@@ -72,7 +72,7 @@ export function Hero() {
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 rounded-full bg-accent py-2 pl-2 pr-6 font-bold uppercase tracking-[0.14em] text-accent-foreground transition-transform duration-300 hover:scale-[1.04]"
+              className="group btn-accent-icon eyebrow"
             >
               <span className="grid size-9 place-items-center rounded-full bg-foreground text-background transition-transform duration-300 group-hover:rotate-12">
                 <Play className="size-4 fill-current" />
@@ -81,7 +81,7 @@ export function Hero() {
             </a>
             <button
               onClick={downloadCV}
-              className="group inline-flex items-center gap-2 rounded-full border border-border px-6 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+              className="group pill-outline eyebrow"
             >
               <Download className="size-4 transition-transform group-hover:-translate-y-0.5" />
               {tr("hero.downloadCv")}

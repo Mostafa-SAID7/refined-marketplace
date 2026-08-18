@@ -76,7 +76,7 @@ export function Footer() {
                 MS
               </span>
             </span>
-            <span className="text-[10px] font-bold uppercase leading-[1.35] tracking-[0.3em] text-foreground">
+            <span className="eyebrow-wide text-foreground">
               Market
               <br />
               Place
@@ -88,14 +88,14 @@ export function Footer() {
               <Link
                 key={item.label}
                 to={item.to}
-                className="text-xs font-bold uppercase tracking-[0.18em] text-foreground transition-colors hover:text-accent"
+                className="nav-label text-foreground transition-colors hover:text-accent"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          <p className="text-right text-[10px] font-bold uppercase leading-[1.6] tracking-[0.22em] text-accent">
+          <p className="text-right eyebrow text-accent">
             {new Date().getFullYear()} | Copyright
             <br />
             All rights reserved

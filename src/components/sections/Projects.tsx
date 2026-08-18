@@ -166,7 +166,7 @@ export function Projects() {
         <Reveal className="flex justify-center">
           <Link
             to="/projects"
-            className="group flex items-center gap-2.5 rounded-full bg-accent px-8 py-4 eyebrow text-accent-foreground transition-transform duration-300 hover:scale-105"
+            className="group btn-accent eyebrow"
           >
             View All Projects
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />

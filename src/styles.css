@@ -96,7 +96,11 @@
   }
 }
 
-/* Utility definitions */
+/* ---------------------------------------------------------------------------
+ * Utility layer — the single source of truth for every repeated surface,
+ * button, chip and label in the app. Components compose these utilities and
+ * must never re-declare their colors, borders or paddings inline.
+ * ------------------------------------------------------------------------ */
 
 /* Shimmering placeholder used by SmartImage and the skeleton components. */
 @utility skeleton-shimmer {
@@ -122,17 +126,11 @@
   contain-intrinsic-size: auto 640px;
 }
 
+/* The one translucent surface. Includes its own border: never add
+ * `border border-border` next to it. */
 @utility glass {
   background: color-mix(in oklab, var(--card) 88%, transparent);
   border: 1px solid var(--border);
-}
-
-/* Glass surface with the standard inner padding used across detail pages. */
-@utility panel {
-  background: color-mix(in oklab, var(--card) 88%, transparent);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 1rem;
 }
 
 /* Small status/meta label. Single source of truth for every chip. */
@@ -149,28 +147,81 @@
   color: var(--accent);
 }
 
-/* Outlined interactive pill used by filters, tag links and secondary CTAs. */
-@utility pill-outline {
+/* --- Buttons -------------------------------------------------------------
+ * Three variants, used everywhere. Layout-only helpers (w-full, mt-*) may be
+ * added by the caller; colors, radius and padding may not. */
+@utility btn-base {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   border-radius: 999px;
-  border: 1px solid var(--border);
-  padding: 0.75rem 1.5rem;
+  padding: 0.875rem 1.75rem;
   font-weight: 600;
+  border: 1px solid transparent;
   transition:
-    color 0.2s ease,
-    border-color 0.2s ease;
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 0.3s ease;
+  &:disabled {
+    opacity: 0.6;
+    transform: none;
+  }
+}
+
+/* Solid accent call to action. */
+@utility btn-accent {
+  @apply btn-base;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  box-shadow: var(--shadow-glow);
+  &:hover:not(:disabled) {
+    transform: scale(1.03);
+  }
+}
+
+/* Accent outline, used by every "see more" secondary action. */
+@utility btn-accent-outline {
+  @apply btn-base;
+  border-color: color-mix(in oklab, var(--accent) 50%, transparent);
+  color: var(--accent);
+  &:hover {
+    background: color-mix(in oklab, var(--accent) 10%, transparent);
+    transform: scale(1.03);
+  }
+}
+
+/* Neutral outline pill used by filters and tertiary links. */
+@utility pill-outline {
+  @apply btn-base;
+  border-color: var(--border);
   &:hover {
     border-color: color-mix(in oklab, var(--accent) 50%, transparent);
     color: var(--accent);
   }
 }
 
+/* --- Typography ----------------------------------------------------------
+ * Uppercase micro-label above headings. Color stays with the caller
+ * (text-accent / text-muted-foreground) so there is one shape, many tones. */
+@utility eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+@utility eyebrow-wide {
+  @apply eyebrow;
+  letter-spacing: 0.35em;
+}
+
 @utility glow-accent {
   box-shadow: var(--shadow-glow);
 }
-
 
 @utility grid-bg {
   background-image: radial-gradient(
@@ -189,6 +240,7 @@
     box-shadow: var(--shadow-lift);
   }
 }
+
 
 :root {
   --radius: 1.25rem;

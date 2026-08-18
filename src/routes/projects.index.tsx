@@ -112,7 +112,7 @@ export function ProjectsPage() {
           <div className="mx-auto max-w-6xl px-5">
             <Reveal>
               <header className="mb-10 max-w-2xl">
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                <span className="eyebrow text-accent">
                   Portfolio
                 </span>
                 <h1 className="mt-3 break-words text-3xl font-bold sm:text-4xl md:text-5xl">All Projects</h1>
@@ -125,7 +125,7 @@ export function ProjectsPage() {
 
             {/* Toolbar: search + sort + view, all in one line on desktop */}
             <div className="sticky top-24 z-20 -mx-5 mb-6 px-5 py-3 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-              <div className="glass grid grid-cols-1 gap-3 rounded-2xl border border-border/60 p-3 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center">
+              <div className="glass grid grid-cols-1 gap-3 rounded-2xl p-3 md:grid-cols-[minmax(0,1fr)_auto_auto] md:items-center">
                 <div className="relative min-w-0">
                   <label htmlFor="project-search" className="sr-only">
                     Search projects

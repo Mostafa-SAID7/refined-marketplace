@@ -23,7 +23,7 @@ export function ProjectCard({ project, index, view = "grid" }: ProjectCardProps)
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.97 }}
       transition={{ duration: 0.35, delay: Math.min(index, 6) * 0.04 }}
-      className="group glass relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:glow-accent"
+      className="group glass relative flex h-full flex-col overflow-hidden rounded-3xl transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:glow-accent"
     >
       <ProjectCardImage project={project} priority={index < 3} />
 
@@ -84,7 +84,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.98 }}
       transition={{ duration: 0.3, delay: Math.min(index, 6) * 0.03 }}
-      className="group glass grid grid-cols-1 gap-5 overflow-hidden rounded-3xl border border-border/60 p-4 transition-all duration-300 hover:border-accent/40 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center"
+      className="group glass grid grid-cols-1 gap-5 overflow-hidden rounded-3xl p-4 transition-all duration-300 hover:border-accent/40 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center"
     >
       <div className="overflow-hidden rounded-2xl">
         <ProjectCardImage project={project} compact priority={index < 2} />

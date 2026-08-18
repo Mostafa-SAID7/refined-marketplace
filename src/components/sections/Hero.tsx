@@ -37,7 +37,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-5 text-[11px] font-bold uppercase tracking-[0.4em] text-accent"
+            className="mb-5 eyebrow-wide text-accent"
           >
             {tr("hero.role")}
           </motion.p>

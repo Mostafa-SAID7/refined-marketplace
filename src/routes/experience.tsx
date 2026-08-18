@@ -59,7 +59,7 @@ function ExperiencePage() {
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-accent-foreground transition-transform hover:scale-[1.02]"
+                className="btn-accent"
               >
                 Work with me
                 <ArrowRight className="size-4" />

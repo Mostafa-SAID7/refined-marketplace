@@ -25,7 +25,7 @@ export function PageHeader({
         </Reveal>
         <Reveal delay={0.05}>
           {kicker && (
-            <span className="mt-8 inline-block text-[11px] font-bold uppercase tracking-[0.35em] text-accent">
+            <span className="mt-8 inline-block eyebrow-wide text-accent">
               {kicker}
             </span>
           )}

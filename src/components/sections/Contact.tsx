@@ -75,7 +75,7 @@ export function Contact({ showHeading = true }: { showHeading?: boolean } = {}) 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 font-semibold text-accent-foreground transition-transform hover:scale-[1.01] disabled:opacity-60 glow-accent"
+              className="group btn-accent w-full"
             >
               {tr("contact.send")}
               <Send className="size-4 transition-transform group-hover:translate-x-0.5" />

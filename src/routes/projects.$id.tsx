@@ -157,7 +157,7 @@ export function ProjectDetail() {
                     <Link
                       to="/projects/$id"
                       params={{ id: prevProject.id }}
-                      className="group glass rounded-xl border border-border p-6 transition-all hover:border-accent/50 hover:glow-accent"
+                      className="group glass rounded-xl p-6 transition-all hover:border-accent/50 hover:glow-accent"
                     >
                       <div className="text-xs font-semibold text-muted-foreground mb-2">
                         ← PREVIOUS PROJECT
@@ -173,7 +173,7 @@ export function ProjectDetail() {
                     <Link
                       to="/projects/$id"
                       params={{ id: nextProject.id }}
-                      className="group glass rounded-xl border border-border p-6 transition-all hover:border-accent/50 hover:glow-accent text-right sm:text-left"
+                      className="group glass rounded-xl p-6 transition-all hover:border-accent/50 hover:glow-accent text-right sm:text-left"
                     >
                       <div className="text-xs font-semibold text-muted-foreground mb-2">
                         NEXT PROJECT →

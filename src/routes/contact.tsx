@@ -53,7 +53,7 @@ function ContactPage() {
               <Reveal key={label} delay={i * 0.07}>
                 <div className="glass h-full rounded-2xl p-6">
                   <Icon className="size-5 text-accent" />
-                  <div className="mt-4 text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+                  <div className="mt-4 eyebrow text-muted-foreground">
                     {label}
                   </div>
                   {href ? (

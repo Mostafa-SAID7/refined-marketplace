@@ -21,7 +21,7 @@ export function TechStack({ techs, variant = "grid", className = "" }: TechStack
   }
 
   return (
-    <div className={`glass rounded-2xl border border-border p-8 ${className}`}>
+    <div className={`glass rounded-2xl p-8 ${className}`}>
       <h2 className="mb-6 text-2xl font-bold">Tech Stack</h2>
       <div className="flex flex-wrap gap-3">
         {techs.map((tech) => (

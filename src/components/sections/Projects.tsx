@@ -24,7 +24,7 @@ function ProjectCard({ project, index = 0 }: { project: Project; index?: number 
         <span className="font-display text-sm font-black text-accent">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-muted-foreground">
+        <span className="eyebrow text-muted-foreground">
           {project.category}
         </span>
       </div>
@@ -166,7 +166,7 @@ export function Projects() {
         <Reveal className="flex justify-center">
           <Link
             to="/projects"
-            className="group flex items-center gap-2.5 rounded-full bg-accent px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-accent-foreground transition-transform duration-300 hover:scale-105"
+            className="group flex items-center gap-2.5 rounded-full bg-accent px-8 py-4 eyebrow text-accent-foreground transition-transform duration-300 hover:scale-105"
           >
             View All Projects
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />

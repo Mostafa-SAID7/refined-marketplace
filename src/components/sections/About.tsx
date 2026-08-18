@@ -42,7 +42,7 @@ export function About() {
                 e.preventDefault();
                 document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="inline-flex items-center gap-2 rounded-full border border-accent/50 px-7 py-3.5 font-semibold text-accent transition-all hover:bg-accent/10 hover:scale-[1.03]"
+              className="btn-accent-outline"
             >
               {tr("about.cta")}
             </a>

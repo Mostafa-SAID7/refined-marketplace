@@ -9,7 +9,7 @@ function Bar({ className = "" }: { className?: string }) {
 
 export function ProjectCardSkeleton({ compact = false }: { compact?: boolean }) {
   return (
-    <div className="glass flex h-full flex-col overflow-hidden rounded-3xl border border-border/60">
+    <div className="glass flex h-full flex-col overflow-hidden rounded-3xl">
       <div className={`skeleton-shimmer ${compact ? "h-36" : "h-48"}`} />
       <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
         <Bar className="h-5 w-2/3" />
@@ -40,7 +40,7 @@ export function ProjectCardSkeleton({ compact = false }: { compact?: boolean }) 
 
 export function ProjectRowSkeleton() {
   return (
-    <div className="glass grid grid-cols-1 gap-5 rounded-3xl border border-border/60 p-4 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center">
+    <div className="glass grid grid-cols-1 gap-5 rounded-3xl p-4 sm:grid-cols-[220px_minmax(0,1fr)] sm:items-center">
       <div className="skeleton-shimmer h-36 rounded-2xl" />
       <div className="space-y-3">
         <Bar className="h-5 w-1/2" />

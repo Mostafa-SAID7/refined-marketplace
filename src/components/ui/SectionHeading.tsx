@@ -4,7 +4,7 @@ export function SectionHeading({ kicker, title }: { kicker?: string; title: stri
   return (
     <Reveal className="mb-14 text-center">
       {kicker && (
-        <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.35em] text-accent">
+        <span className="mb-4 inline-block eyebrow-wide text-accent">
           {kicker}
         </span>
       )}

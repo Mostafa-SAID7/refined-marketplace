@@ -46,7 +46,7 @@ export function SkillsPreview() {
           <div className="mt-10 flex justify-center">
             <Link
               to="/skills"
-              className="group inline-flex items-center gap-2 rounded-full border border-accent/50 px-7 py-3.5 font-semibold text-accent transition-all hover:bg-accent/10 hover:scale-[1.03]"
+              className="group btn-accent-outline"
             >
               Explore the full stack
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />

@@ -54,7 +54,7 @@ function SkillsPage() {
                       <span className="size-2 rounded-full bg-accent" />
                       {group.title}
                     </h2>
-                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                    <span className="eyebrow text-muted-foreground">
                       {group.skills.length}
                     </span>
                   </div>

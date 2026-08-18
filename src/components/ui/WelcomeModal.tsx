@@ -67,7 +67,7 @@ export function WelcomeModal() {
       role="presentation"
       onClick={close}
     >
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm animate-fade-in" />
+      <div className="absolute inset-0 bg-foreground/60 backdrop-blur-sm animate-fade-in" />
 
       <div
         role="dialog"
@@ -76,7 +76,7 @@ export function WelcomeModal() {
         aria-describedby="welcome-modal-body"
         dir={dir}
         onClick={(event) => event.stopPropagation()}
-        className="glass relative w-full max-w-lg overflow-hidden rounded-3xl p-8 text-center shadow-2xl animate-scale-in sm:p-10"
+        className="relative border border-border bg-card w-full max-w-lg overflow-hidden rounded-3xl p-8 text-center shadow-2xl animate-scale-in sm:p-10"
       >
         <div className="grid-bg pointer-events-none absolute inset-0 opacity-40" />
 

@@ -5,45 +5,68 @@ export type Lang = "en" | "ar";
 type Dict = Record<string, { en: string; ar: string }>;
 
 export const t: Dict = {
-  "nav.about": { en: "About", ar: "نبذة" },
-  "nav.skills": { en: "Skills", ar: "المهارات" },
-  "nav.projects": { en: "Projects", ar: "المشاريع" },
-  "nav.experience": { en: "Experience", ar: "الخبرات" },
-  "nav.contact": { en: "Contact", ar: "تواصل" },
+  "nav.works": { en: "WORKS", ar: "الأعمال" },
+  "nav.about": { en: "ABOUT", ar: "نبذة" },
+  "nav.experience": { en: "AWARDS", ar: "الجوائز" },
+  "nav.contact": { en: "CONTACTS", ar: "تواصل" },
 
   "hero.eyebrow": {
-    en: "Senior Full Stack Engineer | 4+ Years Specialized Experience",
-    ar: "مهندس متكامل أول | 4+ سنوات خبرة متخصصة",
+    en: "SENIOR FULL STACK ENGINEER",
+    ar: "مهندس متكامل أول",
   },
-  "hero.role": {
-    en: "Full Stack Engineer & Microservices Architect",
-    ar: "مهندس متكامل ومعماري الخدمات الصغيرة",
-  },
-  "hero.title1": { en: "Architecting enterprise", ar: "بناء أنظمة" },
-  "hero.title2": { en: "marketplace solutions.", ar: "تجارة إلكترونية متقدمة." },
+  "hero.name.first": { en: "MOSTAFA", ar: "مصطفى" },
+  "hero.name.last": { en: "SAMIR", ar: "سمير" },
   "hero.subtitle": {
-    en: "I specialize in high-performance Microservices, .NET 8, and modern Web Architectures. Expert in building scalable, multi-tenant enterprise platforms with optimized database performance and real-time integration.",
-    ar: "متخصص في الخدمات الصغيرة عالية الأداء و.NET 8 والعمائر الويب الحديثة. خبير في بناء المنصات الموثوقة والقابلة للتوسع متعددة المستأجرين.",
+    en: "Senior Full Stack Engineer with 4+ years specializing in high-performance .NET 8 Microservices & Next.js Marketplaces.",
+    ar: "مهندس متكامل أول بخبرة تزيد عن 4 سنوات، متخصص في الخدمات المصغرة عالية الأداء باستخدام .NET 8 ومنصات التجارة الإلكترونية بـ Next.js.",
   },
-  "hero.cta1": { en: "View My Work", ar: "استعرض أعمالي" },
-  "hero.cta2": { en: "Get in Touch", ar: "تواصل معي" },
-  "hero.workWithMe": { en: "Work with Me", ar: "اعمل معي" },
-  "hero.downloadCv": { en: "Download CV", ar: "تحميل السيرة الذاتية" },
+  "hero.cta": { en: "LEARN MORE", ar: "اكتشف المزيد" },
 
-  "about.title": { en: "About Me", ar: "نبذة عني" },
-  "about.kicker": { en: "Senior Full Stack Engineer", ar: "مهندس متكامل أول" },
-  "about.body": {
-    en: "With 4+ years of experience specializing in high-performance Microservices and modern Web Architectures, I've built scalable marketplace-ready solutions using .NET 8, ASP.NET Core Web API, and modern frontend frameworks. I excel at optimizing system performance, architecting complex enterprise platforms, and leading technical initiatives that drive business value.",
-    ar: "بخبرة أكثر من 4 سنوات في الخدمات الصغيرة عالية الأداء والعمائر الويب الحديثة، بنيت حلولاً قابلة للتوسع باستخدام .NET 8 و ASP.NET Core. أتفوق في تحسين أداء الأنظمة وتصميم المنصات المعقدة.",
+  "about.preview.title1": { en: "4+ Years of", ar: "4+ سنوات من" },
+  "about.preview.title2": { en: "Full Stack Excellence", ar: "التميز التقني" },
+  "about.preview.desc": { 
+    en: "Senior Full Stack Engineer specializing in scaling marketplace throughput by 300% using .NET 8, Clean Architecture & Next.js.",
+    ar: "مهندس متكامل أول متخصص في زيادة سعة المنصات بنسبة 300% باستخدام .NET 8 و Clean Architecture و Next.js."
   },
-  "about.cta": { en: "Get in Touch", ar: "تواصل معي" },
-  "skills.title": { en: "Skills & Expertise", ar: "المهارات والخبرات" },
-  "projects.title": { en: "Featured Projects", ar: "مشاريع مختارة" },
-  "experience.title": { en: "Experience", ar: "الخبرات" },
-  "experience.stats.years": { en: "Years", ar: "سنوات" },
-  "experience.stats.companies": { en: "Companies", ar: "شركات" },
-  "experience.stats.teamScale": { en: "Team Scale", ar: "حجم الفريق" },
-  "testimonials.title": { en: "What Clients Say", ar: "آراء العملاء" },
+  "about.preview.cta": { en: "VIEW CASE", ar: "عرض الحالة" },
+
+  "projects.preview.view": { en: "VIEW PROJECT", ar: "عرض المشروع" },
+
+  "experience.preview.title": { en: "Awards & Recognition", ar: "الجوائز والتكريمات" },
+  "experience.preview.cta": { en: "VIEW ALL AWARDS", ar: "عرض جميع الجوائز" },
+  "experience.preview.selected": { en: "SELECTED WORKS", ar: "أعمال مختارة" },
+
+  "projects.index.title": { en: "All Projects", ar: "جميع المشاريع" },
+  "projects.index.desc": { 
+    en: "Marketplaces, .NET 8 microservices, real-time dashboards, and multi-tenant architectures.", 
+    ar: "أسواق رقمية، خدمات مصغرة بـ .NET 8، لوحات تحكم لحظية، وهياكل متعددة المستأجرين." 
+  },
+  "projects.index.search": { en: "Search projects", ar: "البحث في المشاريع" },
+  "projects.index.searchPlaceholder": { en: "Search by name, tech, client...", ar: "ابحث بالاسم، التقنية، العميل..." },
+  "projects.index.clear": { en: "Clear search", ar: "مسح البحث" },
+  "projects.index.sort": { en: "Sort projects", ar: "فرز المشاريع" },
+  "projects.index.featured": { en: "Featured", ar: "مميز" },
+  "projects.index.newest": { en: "Newest", ar: "الأحدث" },
+  "projects.index.oldest": { en: "Oldest", ar: "الأقدم" },
+  "projects.index.grid": { en: "Grid view", ar: "عرض شبكي" },
+  "projects.index.list": { en: "List view", ar: "عرض قائمة" },
+
+  "project.detail.back": { en: "Back to all projects", ar: "العودة لجميع المشاريع" },
+  "project.detail.arch": { en: "Architecture & Tech", ar: "المعمارية والتقنيات" },
+  "project.detail.brief": { en: "Project Brief", ar: "ملخص المشروع" },
+  "project.detail.client": { en: "Client", ar: "العميل" },
+  "project.detail.db": { en: "Database Engine", ar: "قاعدة البيانات" },
+  "project.detail.status": { en: "Launch Status", ar: "حالة الإطلاق" },
+  "project.detail.status.live": { en: "Live in Production", ar: "يعمل في الإنتاج" },
+  "project.detail.status.local": { en: "Archived / Local", ar: "مؤرشف / محلي" },
+  "project.detail.visit": { en: "Visit Live Site", ar: "زيارة الموقع الحي" },
+  "project.detail.source": { en: "View Source Code", ar: "عرض الشفرة المصدرية" },
+  "project.detail.continue": { en: "Continue Exploring", ar: "واصل الاستكشاف" },
+  "project.detail.prev": { en: "PREVIOUS PROJECT", ar: "المشروع السابق" },
+  "project.detail.next": { en: "NEXT PROJECT", ar: "المشروع التالي" },
+  
+  "project.notFound.title": { en: "Project Not Found", ar: "المشروع غير موجود" },
+  "project.notFound.back": { en: "Back to Projects", ar: "العودة للمشاريع" },
 
   "contact.title": { en: "Let's Build Something", ar: "لنبنِ شيئاً معاً" },
   "contact.subtitle": {

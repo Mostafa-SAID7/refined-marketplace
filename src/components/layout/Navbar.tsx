@@ -4,17 +4,17 @@ import { Link } from "@tanstack/react-router";
 import { useTheme } from "@/lib/theme";
 import { useI18n } from "@/lib/i18n";
 
-const navLinks = [
-  { label: "WORKS", to: "/projects" },
-  { label: "ABOUT", to: "/about" },
-  { label: "AWARDS", to: "/experience" },
-  { label: "CONTACTS", to: "/contact" },
-] as const;
-
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const { lang, toggleLang } = useI18n();
+  const { lang, toggleLang, tr } = useI18n();
+
+  const navLinks = [
+    { key: "nav.works", to: "/projects" },
+    { key: "nav.about", to: "/about" },
+    { key: "nav.experience", to: "/experience" },
+    { key: "nav.contact", to: "/contact" },
+  ] as const;
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 pb-2 bg-background border-b border-border transition-colors duration-300">
@@ -52,11 +52,11 @@ export function Navbar() {
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((l) => (
             <Link
-              key={l.label}
+              key={l.key}
               to={l.to}
               className="font-sans text-xs font-extrabold tracking-[0.25em] text-foreground transition-opacity hover:opacity-75 uppercase"
             >
-              {l.label}
+              {tr(l.key)}
             </Link>
           ))}
         </div>
@@ -122,12 +122,12 @@ export function Navbar() {
         <div className="mx-auto mt-3 flex max-w-6xl flex-col gap-2 rounded-[2rem] bg-card text-card-foreground p-5 md:hidden border border-border shadow-xl">
           {navLinks.map((l) => (
             <Link
-              key={l.label}
+              key={l.key}
               to={l.to}
               onClick={() => setOpen(false)}
               className="rounded-xl px-4 py-2.5 text-start font-sans text-xs font-black tracking-[0.2em] uppercase text-foreground hover:bg-foreground/10"
             >
-              {l.label}
+              {tr(l.key)}
             </Link>
           ))}
           <div className="flex items-center gap-3 pt-3 border-t border-border mt-1 px-4">

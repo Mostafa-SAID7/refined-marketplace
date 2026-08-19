@@ -419,3 +419,39 @@
     color: var(--accent-foreground);
   }
 }
+
+/* ── Theme toggle: circular View Transition reveal ───────────────────────── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Freeze competing work while the snapshot animates so the reveal feels instant. */
+html.theme-transitioning * {
+  transition: none !important;
+  animation-play-state: paused !important;
+}
+
+html.theme-transitioning {
+  pointer-events: none;
+}
+
+html.theme-transitioning :where([class*="backdrop-blur"]) {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}

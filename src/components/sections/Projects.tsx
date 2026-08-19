@@ -17,7 +17,7 @@ export function Projects() {
         <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
           {featuredWorks.map((project, index) => {
             const num = `0${index + 1}`;
-            const Icon = icons[index % icons.length];
+            const Icon = icons[index % icons.length] ?? icons[0]!;
             const tags = project.tech.slice(0, 3);
 
             return (

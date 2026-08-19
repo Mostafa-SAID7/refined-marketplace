@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import { motion } from "framer-motion";
@@ -148,11 +149,17 @@ function IconLink({
 
 interface BadgeProps {
   children: React.ReactNode;
+  className?: string;
 }
 
-export function Badge({ children }: BadgeProps) {
+export function Badge({ children, className }: BadgeProps) {
   return (
-    <span className="rounded-full bg-primary px-3 py-1 font-sans text-[10px] font-black tracking-widest text-primary-foreground uppercase shadow-sm">
+    <span
+      className={cn(
+        "rounded-full bg-primary px-3 py-1 font-sans text-[10px] font-black tracking-widest text-primary-foreground uppercase shadow-sm",
+        className,
+      )}
+    >
       {children}
     </span>
   );

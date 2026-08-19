@@ -12,7 +12,7 @@ import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
 import { describeError } from "@/lib/error-capture";
-import { ThemeProvider } from "@/lib/theme";
+import { ThemeProvider, themeBootstrapScript } from "@/lib/theme";
 import { I18nProvider } from "@/lib/i18n";
 import { useSmoothScroll } from "@/lib/smooth-scroll";
 import { WelcomeModal } from "@/components/ui/WelcomeModal";
@@ -113,11 +113,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
         <HeadContent />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <Scripts />
       </body>

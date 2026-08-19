@@ -65,12 +65,24 @@ export function Navbar() {
         <div className="flex items-center gap-2.5">
           {/* Theme Toggle Button */}
           <button
-            onClick={toggleTheme}
+            onClick={(e) => {
+              const r = e.currentTarget.getBoundingClientRect();
+              toggleTheme({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
+            }}
             aria-label="Toggle theme"
-            className="grid size-9 place-items-center rounded-full bg-foreground/10 border border-border text-foreground transition-all hover:bg-foreground/20 hover:scale-105"
+            className="group relative grid size-9 place-items-center overflow-hidden rounded-full bg-foreground/10 border border-border text-foreground transition-all duration-200 hover:bg-foreground/20 hover:scale-105 active:scale-95"
             title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
           >
-            {theme === "dark" ? <Sun className="size-4 text-[#FFD000]" /> : <Moon className="size-4 text-[#FF4B35]" />}
+            <Sun
+              className={`absolute size-4 text-[#FFD000] transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
+                theme === "dark" ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0"
+              }`}
+            />
+            <Moon
+              className={`absolute size-4 text-[#FF4B35] transition-all duration-500 [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
+                theme === "dark" ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"
+              }`}
+            />
           </button>
 
           {/* Language Switcher */}

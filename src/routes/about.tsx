@@ -1,127 +1,88 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { createFileRoute } from "@tanstack/react-router";
+import { CheckCircle2 } from "lucide-react";
+import { PageSkeleton } from "@/components/ui/Skeletons";
+import { PageShell } from "@/components/layout/PageShell";
+import { PageIntro } from "@/components/ui/PageIntro";
+import { LottieAside } from "@/components/ui/LottieAside";
+import { CtaLink, CtaRow } from "@/components/ui/CtaLink";
+import { pageSeo, pageTitle } from "@/lib/seo";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { useI18n } from "@/lib/i18n";
 
-const stats = [
-  { value: "4+", label: "Years Experience" },
-  { value: "300%", label: "Throughput Boost" },
-  { value: "1,000+", label: "IoT Endpoints" },
-  { value: ".NET 8", label: "Clean Microservices" },
+const STATS = [
+  { value: "4+", key: "about.stat.years" },
+  { value: "300%", key: "about.stat.throughput" },
+  { value: "1,000+", key: "about.stat.iot" },
+  { value: ".NET 8", key: "about.stat.microservices" },
 ];
 
-const principles = [
-  {
-    title: "Clean Architecture & DDD",
-    body: "Architecting .NET 8 Microservices using Clean Architecture and Domain-Driven Design (DDD) boundaries so platforms scale multi-tenancy seamlessly.",
-  },
-  {
-    title: "Real-Time Telemetry & SignalR",
-    body: "High-throughput SignalR and gRPC backend integration layers managing real-time data streams and over 1,000 IoT endpoints.",
-  },
-  {
-    title: "Measured Database Tuning",
-    body: "300% system performance optimization through SQL Server query tuning, indexing, and Redis distributed caching.",
-  },
-  {
-    title: "Full Stack Ownership",
-    body: "End-to-end execution from database schemas and REST APIs down to Next.js, React, and Angular responsive frontends.",
-  },
-];
+const PRINCIPLES = [1, 2, 3, 4].map((n) => ({
+  titleKey: `about.principle.${n}.title`,
+  bodyKey: `about.principle.${n}.body`,
+}));
+
+const DESCRIPTION =
+  "Senior Full Stack Engineer with 4+ years of experience specializing in high-performance .NET 8 Microservices & Next.js marketplaces.";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About — Mostafa Samir | Senior Full Stack Engineer" },
-      {
-        name: "description",
-        content:
-          "Senior Full Stack Engineer with 4+ years of experience specializing in high-performance .NET 8 Microservices & Next.js marketplaces.",
-      },
-    ],
-    links: [{ rel: "canonical", href: "/about" }],
-  }),
+  head: () => pageSeo({ title: pageTitle("About"), description: DESCRIPTION, path: "/about" }),
+  pendingComponent: PageSkeleton,
   component: AboutPage,
 });
 
 function AboutPage() {
+  const { tr } = useI18n();
+
   return (
-    <div className="min-h-screen select-none pt-24 pb-12 overflow-x-hidden">
-      <Navbar />
-      <main className="mx-auto max-w-6xl px-4 sm:px-8 md:px-12">
-        {/* Header Banner */}
-        <section className="py-12 text-center">
-          <span className="rounded-full bg-foreground/10 px-4 py-1.5 font-sans text-xs font-black tracking-[0.25em] text-primary uppercase border border-border inline-block mb-4">
-            SENIOR FULL STACK ENGINEER
-          </span>
-          <h1 className="font-['Oswald',sans-serif] text-5xl sm:text-6xl md:text-7xl font-bold text-foreground tracking-tight uppercase leading-tight mb-4">
-            About Mostafa Samir
-          </h1>
-          <p className="font-sans text-sm sm:text-base text-foreground/90 max-w-2xl mx-auto leading-relaxed">
-            Senior Full Stack Engineer specializing in building scalable multi-tenant platforms, .NET 8 Microservices, and high-performance modern web apps.
-          </p>
-        </section>
+    <PageShell>
+      <PageIntro
+        eyebrow={tr("about.page.eyebrow")}
+        title={tr("about.page.title")}
+        description={tr("about.page.desc")}
+      />
 
-        {/* Stats Grid */}
-        <section className="py-6">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {stats.map((s) => (
+      <section className="section-y-sm">
+        <LottieAside src="/lottie/about-side.lottie" size="max-w-md">
+          <div className="grid grid-cols-2 gap-4">
+            {STATS.map((stat) => (
               <div
-                key={s.label}
-                className="rounded-[2rem] bg-card p-6 text-center border border-border shadow-lg"
+                key={stat.key}
+                className="surface-card p-6 text-center"
               >
-                <div className="font-['Oswald',sans-serif] text-3xl sm:text-4xl font-bold text-card-foreground">
-                  {s.value}
+                <div dir="ltr" className="type-h2 text-card-foreground">
+                  {stat.value}
                 </div>
-                <div className="font-sans text-[11px] font-black tracking-wider text-card-foreground/80 uppercase mt-1">
-                  {s.label}
-                </div>
+                <div className="mt-1 type-micro text-card-foreground/80">{tr(stat.key)}</div>
               </div>
             ))}
           </div>
-        </section>
+        </LottieAside>
+      </section>
 
-        {/* Core Principles */}
-        <section className="py-12">
-          <h2 className="font-['Oswald',sans-serif] text-3xl sm:text-4xl font-bold text-foreground mb-8 text-center uppercase tracking-tight">
-            Engineering Approach
-          </h2>
-          <div className="grid gap-6 sm:grid-cols-2">
-            {principles.map((p) => (
-              <div
-                key={p.title}
-                className="rounded-[2.5rem] bg-card p-8 border border-border shadow-[var(--shadow-glow)]"
-              >
-                <h3 className="font-['Oswald',sans-serif] text-2xl font-bold text-card-foreground flex items-center gap-3 mb-3">
-                  <CheckCircle2 className="size-5 text-primary" />
-                  {p.title}
-                </h3>
-                <p className="font-sans text-xs sm:text-sm text-card-foreground/85 leading-relaxed">
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
+      <section className="section-y">
+        <SectionHeading title={tr("about.page.approach")} />
+        <div className="grid gap-6 sm:grid-cols-2">
+          {PRINCIPLES.map((principle) => (
+            <div
+              key={principle.titleKey}
+              className="surface-card p-8"
+            >
+              <h3 className="mb-3 flex items-center gap-3 type-h3 text-card-foreground">
+                <CheckCircle2 className="size-5 text-primary" />
+                {tr(principle.titleKey)}
+              </h3>
+              <p className="type-body text-card-foreground/85">{tr(principle.bodyKey)}</p>
+            </div>
+          ))}
+        </div>
 
-          <div className="mt-12 flex justify-center gap-4 flex-wrap">
-            <Link
-              to="/skills"
-              className="inline-flex items-center gap-2 rounded-full bg-card px-6 py-3 font-sans text-xs font-black tracking-widest text-card-foreground uppercase shadow-md border border-border hover:scale-105 transition-transform"
-            >
-              Skills & Tooling
-              <ArrowRight className="size-4" />
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-sans text-xs font-black tracking-widest text-primary-foreground uppercase shadow-md hover:scale-105 transition-transform"
-            >
-              Get in Touch
-              <ArrowRight className="size-4" />
-            </Link>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+        <CtaRow>
+          <CtaLink to="/skills" variant="secondary">
+            {tr("about.page.skillsCta")}
+          </CtaLink>
+          <CtaLink to="/contact">{tr("about.page.contactCta")}</CtaLink>
+        </CtaRow>
+      </section>
+    </PageShell>
   );
 }

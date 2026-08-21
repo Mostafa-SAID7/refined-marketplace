@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m as motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { credentials, type CredentialTab } from "@/data";
 import { useI18n } from "@/lib/i18n";

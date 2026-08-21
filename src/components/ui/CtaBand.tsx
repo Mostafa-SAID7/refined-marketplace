@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { LottieIcon } from "@/components/ui/LottieIcon";
+import { LottiePoster } from "@/components/ui/LottiePoster";
 
 /**
  * Closing call-to-action band: copy + buttons on the start side, a compact
@@ -43,6 +44,8 @@ export function CtaBand({
           <div aria-hidden="true" className="hidden sm:block">
             <LottieIcon
               src={lottie}
+              activateOn="interaction"
+              fallback={<LottiePoster />}
               className="mx-auto aspect-square w-full max-w-[220px] md:max-w-[260px]"
             />
           </div>

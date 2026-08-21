@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { m as motion, useReducedMotion } from "framer-motion";
 import type { Project } from "@/data";
 import { Tag } from "@/components/ui/Tag";
 import { useI18n } from "@/lib/i18n";

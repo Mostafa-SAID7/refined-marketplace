@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, X } from "lucide-react";
 import {
-  motion,
+  m as motion,
   AnimatePresence,
   useReducedMotion,
   useMotionValue,

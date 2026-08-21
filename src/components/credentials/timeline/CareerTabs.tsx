@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { credentials, credentialTabs, type CredentialTab } from "@/data";
 import { useI18n } from "@/lib/i18n";
 import { tabIcons } from "./tabIcons";

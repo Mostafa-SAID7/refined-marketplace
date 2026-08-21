@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import type { CredentialItem } from "@/data";
 import { EASE } from "@/lib/motion";
 import { iconForCredential } from "./credentialIcon";

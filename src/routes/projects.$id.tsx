@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { projects } from "@/data";
 import { getProjectDetail, getRelatedProjects } from "@/data/project-details";

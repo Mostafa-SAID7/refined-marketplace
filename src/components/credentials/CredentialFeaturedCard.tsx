@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m as motion } from "framer-motion";
 import { Play } from "lucide-react";
 import type { CredentialItem } from "@/data";
 import { EASE } from "@/lib/motion";

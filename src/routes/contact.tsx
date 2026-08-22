@@ -59,6 +59,7 @@ function ContactPage() {
       <div className="mb-2 flex justify-center">
         <LottieIcon
           src="/lottie/contact-mail.lottie"
+          activateOn="interaction"
           className="size-40 sm:size-52"
           fallback={<Mail className="size-16 text-primary/60" />}
         />

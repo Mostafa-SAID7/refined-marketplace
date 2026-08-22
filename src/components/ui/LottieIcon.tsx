@@ -47,7 +47,8 @@ export function LottieIcon({
   /**
    * `"visible"` loads the runtime when the element scrolls into view.
    * `"interaction"` keeps the static poster on first visit and only downloads
-   * the ~1.2 MB WASM runtime when the user hovers, taps or focuses it.
+   * the ~1.2 MB WASM runtime after deliberate pointer, touch, or keyboard focus.
+   * Hover alone never starts a download.
    */
   activateOn?: "visible" | "interaction";
 }) {
@@ -99,7 +100,6 @@ export function LottieIcon({
 
     const onIntent = () => start();
     if (activateOn === "interaction") {
-      host.addEventListener("pointerenter", onIntent, { once: true });
       host.addEventListener("pointerdown", onIntent, { once: true });
       host.addEventListener("focusin", onIntent, { once: true });
     }
@@ -134,7 +134,6 @@ export function LottieIcon({
       cancelled = true;
       if (idleHandle) window.clearTimeout(idleHandle);
       io.disconnect();
-      host.removeEventListener("pointerenter", onIntent);
       host.removeEventListener("pointerdown", onIntent);
       host.removeEventListener("focusin", onIntent);
       document.removeEventListener("visibilitychange", onVisibility);

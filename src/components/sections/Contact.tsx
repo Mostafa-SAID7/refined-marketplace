@@ -9,7 +9,6 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { LottieIcon } from "@/components/ui/LottieIcon";
 import { LottieAside } from "@/components/ui/LottieAside";
 import { useI18n } from "@/lib/i18n";
-import { prefetchLottie } from "@/lib/lottie-cache";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -53,9 +52,6 @@ export function Contact({ showHeading = true }: { showHeading?: boolean } = {}) 
           <Reveal>
             <form
               onSubmit={handleSubmit(onSubmit)}
-              // Warm the success animation as soon as the user starts typing, so
-              // it is already cached when the form flips to the sent state.
-              onFocusCapture={() => prefetchLottie("/lottie/contact-success.lottie")}
               className="surface-card space-y-5 p-6 sm:p-8"
             >
               <div>

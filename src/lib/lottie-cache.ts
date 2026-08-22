@@ -42,6 +42,18 @@ export function loadLottiePlayer(): Promise<PlayerModule> {
   if (!playerPromise)
     playerPromise = import("@lottiefiles/dotlottie-react").then((mod) => {
       mod.setWasmUrl(WASM_URL);
+      // Start fetching + compiling the ~1.2 MB WASM immediately, in parallel
+      // with the React component mounting, so the first animation doesn't
+      // wait for it sequentially (import → mount → fetch → compile → play).
+      //
+      // `DotLottie.preload()` is the library's own supported way to do this
+      // (it calls the shared WASM manager's `load()`), but the React package
+      // only re-exports it in its *types* — at runtime `DotLottie` is not on
+      // the module — so import it from the underlying web package, which is
+      // the same singleton the player already uses.
+      void import("@lottiefiles/dotlottie-web")
+        .then((web) => web.DotLottie.preload())
+        .catch(() => {});
       return mod;
     });
   return playerPromise;

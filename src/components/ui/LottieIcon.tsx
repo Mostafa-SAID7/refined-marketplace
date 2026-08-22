@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import type { DotLottie } from "@lottiefiles/dotlottie-react";
 import {
   canLoadLottiePlayer,
@@ -140,13 +140,18 @@ export function LottieIcon({
     };
   }, [src, playOnce, rootMargin, eager, activateOn]);
 
+  // dotLottie can take ownership of the buffer, so hand it a copy and keep the
+  // cached original intact for the next mount. The copy is memoized on `data`
+  // so its identity stays stable across unrelated re-renders — the player's
+  // `useEffect(() => load({data}), [data])` would otherwise reload and restart
+  // the animation every time a parent re-renders (theme toggle, i18n, …).
+  const playerData = useMemo(() => (data ? data.slice(0) : null), [data]);
+
   return (
     <div ref={hostRef} className={className} aria-hidden="true">
-      {Player && data ? (
+      {Player && playerData ? (
         <Player
-          // dotLottie can take ownership of the buffer, so hand it a copy and
-          // keep the cached original intact for the next mount.
-          data={data.slice(0)}
+          data={playerData}
           loop={playOnce ? false : loop}
           autoplay
           speed={speed}

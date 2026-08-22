@@ -28,7 +28,7 @@ export function LottieAside({
       <div aria-hidden="true" className="hidden sm:block">
         <LottieIcon
           src={src}
-          activateOn="interaction"
+          activateOn="visible"
           fallback={<LottiePoster />}
           className={`mx-auto aspect-square w-full ${size} ${mediaClassName}`}
         />

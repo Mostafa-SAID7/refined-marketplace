@@ -17,7 +17,8 @@ export const ROUTE_LOTTIE: Record<string, readonly string[]> = {
   "/about": ["/lottie/about-side.lottie"],
   "/skills": ["/lottie/skills-side.lottie"],
   "/experience": ["/lottie/experience-side.lottie"],
-  "/contact": ["/lottie/contact-mail.lottie", "/lottie/contact-side.lottie"],
+  // Contact animations stay interaction-gated; avoid downloading them during nav hover.
+  "/contact": [],
 };
 
 const warmed = new Set<string>();
